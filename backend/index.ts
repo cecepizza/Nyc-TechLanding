@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import sheetsRouter from "./routes/sheets.ts";
+import sheetsRouter from "./routes/sheets";
 
 dotenv.config();
 
