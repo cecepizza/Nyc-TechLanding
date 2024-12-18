@@ -10,7 +10,10 @@ const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
-//initialize the google sheets api
+// confirm router initilization
+console.log("initializing gsheets API router");
+
+// initialize the google sheets api
 const auth = new google.auth.GoogleAuth({
   credentials: credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
@@ -18,36 +21,20 @@ const auth = new google.auth.GoogleAuth({
 
 // test route
 router.get("/test", async (req: Request, res: Response) => {
+  console.log("Recieved request on /api/sheets/test");
+
   let rows;
   try {
     const sheets = google.sheets({ version: "v4", auth });
 
-    const spreadsheet = await sheets.spreadsheets.create({
-      requestBody: {
-        properties: {
-          title: "New Spreadsheet",
-        },
-      },
-    });
-
-    // Insert data into the spreadsheet
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: spreadsheet.data.spreadsheetId!,
-      range: "Sheet1!A1:B2",
-      valueInputOption: "RAW",
-      requestBody: {
-        values: [
-          ["Name", "Score"],
-          ["Test User", "100"],
-        ],
-      },
-    });
-
+    // fetch data from exisiting google sheet
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: spreadsheet.data.spreadsheetId!,
-      range: "Sheet1",
+      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      range: "jobs!2:2",
     });
+
     rows = response.data.values;
+    console.log("data retrieved:", rows);
     res.json({ data: rows });
   } catch (error) {
     console.error("Error:", error);
