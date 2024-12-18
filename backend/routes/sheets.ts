@@ -47,7 +47,7 @@ router.get("/jobs", async (req: Request, res: Response) => {
   console.log("Recieved request on /api/sheets/jobs");
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "jobs!A1:Z100",
     });
     res.json({ data: response.data.values });
@@ -59,10 +59,11 @@ router.get("/jobs", async (req: Request, res: Response) => {
 
 // startups route
 router.get("/startups", async (req: Request, res: Response) => {
+  const sheetId = (req.query.id as string) || process.env.STARTUPS_SHEET_ID;
   console.log("Recieved request on /api/sheets/startups");
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      spreadsheetId: sheetId,
       range: "startups!A1:Z100",
     });
     res.json({ data: response.data.values });
@@ -77,7 +78,7 @@ router.get("/vcs", async (req: Request, res: Response) => {
   console.log("Received request on /api/sheets/vcs");
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "vcs!A1:Z100",
     });
     res.json({ data: response.data.values });
@@ -92,7 +93,7 @@ router.get("/accelerators", async (req: Request, res: Response) => {
   console.log("Received request on /api/sheets/accelerators");
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "accelerators!A1:Z100",
     });
     res.json({ data: response.data.values });

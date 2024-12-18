@@ -6,20 +6,26 @@ import { LampDemo } from "@/components/lamp";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8">
-      <LampDemo />
+      {/* <LampDemo /> */}
       <h1 className="text-4xl font-bold mb-8">Welcome to Our Platform</h1>
       <nav className="flex flex-col gap-4">
-        <Link href="/jobs" className="text-lg text-blue-500 hover:underline">
-          Jobs
+        <Link
+          href="/jobs"
+          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
+        >
+          Available Jobs
         </Link>
-        <Link href="/events" className="text-lg text-blue-500 hover:underline">
+        <Link
+          href="/events"
+          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
+        >
           Events
         </Link>
         <Link
-          href="/accelerators"
-          className="text-lg text-blue-500 hover:underline"
+          href="/partners"
+          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
         >
-          Accelerators/Startups/VCs
+          Tech Partners
         </Link>
       </nav>
     </div>
