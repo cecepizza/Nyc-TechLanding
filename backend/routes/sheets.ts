@@ -4,6 +4,7 @@ import { google } from "googleapis";
 import path from "path";
 import { fileURLToPath } from "url";
 import credentials from "./credentials.json";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -100,6 +101,52 @@ router.get("/accelerators", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error fetching accelerators data:", error);
     res.status(500).json({ error: "failed to fetch accelerators data" });
+  }
+});
+
+// Add this new route for updating events
+router.post("/events/update", async (req: Request, res: Response) => {
+  try {
+    // Read the scraped events from the JSON file
+    const scrapedEventsPath = path.join(
+      __dirname,
+      "../scripts/scraped-events.json"
+    );
+    const eventsData = JSON.parse(fs.readFileSync(scrapedEventsPath, "utf-8"));
+
+    // Format the events for Google Sheets
+    const values = eventsData.map((event: any) => [
+      event.name,
+      event.date,
+      event.time,
+      event.organizer,
+      event.location,
+      event.url,
+      event.cover_image_url,
+      event.event_type,
+      event.last_updated,
+    ]);
+
+    // Clear existing content
+    await sheets.spreadsheets.values.clear({
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+      range: "events!A2:I100",
+    });
+
+    // Update with new values
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+      range: "events!A2",
+      valueInputOption: "RAW",
+      requestBody: {
+        values: values,
+      },
+    });
+
+    res.json({ success: true, message: "Events updated successfully" });
+  } catch (error) {
+    console.error("Error updating events:", error);
+    res.status(500).json({ error: "Failed to update events" });
   }
 });
 

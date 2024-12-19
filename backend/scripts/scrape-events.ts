@@ -16,7 +16,7 @@ function cleanDate(dateStr: string): string {
     .trim();
 }
 
-async function scrapeEvents() {
+export async function scrapeEvents() {
   console.log("Starting scrape");
   const browser = await chromium.launch({ headless: false });
   const page = await browser.newPage();
