@@ -1,26 +1,3 @@
-// require("dotenv").config();
-
-// const fetch = require("node-fetch");
-
-// async function testLumaCredentials() {
-//   try {
-//     const response = await fetch("https://api.lumen.ai/v1/events", {
-//       headers: {
-//         Authorization: `Bearer ${process.env.LUMEN_API_KEY}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     const data = await response.json();
-//     console.log("✅ Luma API connection successful!");
-//     console.log("Events found:", data);
-//   } catch (error) {
-//     console.log("❌ Error testing Luma API:");
-//     if (error instanceof Error) {
-//       console.log(error.message);
-//     }
-//   }
-// }
-
 // test-luma.ts
 import "dotenv/config";
 import fetch from "node-fetch";
@@ -57,7 +34,5 @@ async function testLumaConnection() {
     console.log("Error details:", error);
   }
 }
-
-testLumaConnection();
 
 testLumaConnection();

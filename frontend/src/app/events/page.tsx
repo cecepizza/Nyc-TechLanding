@@ -14,22 +14,21 @@ export default function Events() {
 
   useEffect(() => {
     async function fetchEvents() {
+      console.log("frontend: fetching events");
       try {
-        const response = await fetch("/api/events");
-        console.log("Response status:", response.status);
+        const response = await fetch("http://localhost:8000/api/events");
+        console.log("frontend: response status:", response.status);
         if (!response.ok) {
+          console.log("frontend: response not ok");
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Fetched data:", data);
-        if (data.events) {
-          console.log("Events array:", data.events);
-        } else {
-          console.log("No events found in the response.");
-        }
-        setEvents(data.events || []);
+        console.log("frontend: recieved response:", data);
+
+        setEvents(Array.isArray(data.events) ? data.events : []);
       } catch (error) {
         console.error("Error fetching events:", error);
+        setEvents([]);
       }
     }
 
@@ -40,6 +39,7 @@ export default function Events() {
     <div className="min-h-screen flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-bold mb-8">NYC Tech Events</h1>
       <div className="flex flex-col gap-4">
+        {events.length === 0 && <p>No events to display.</p>}
         {events.map((event) => (
           <a
             key={event.api_id}
