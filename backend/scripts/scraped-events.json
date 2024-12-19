@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Insight Cascade: using LLMs to become more human",
+    "url": "https://partiful.com/e/vRyB2OOET6Nz5bnZJzlS",
+    "cover_image_url": null,
+    "date": "Dec 19, 2024",
+    "time": "6:30 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Andrew Blevins and Jason Ganz",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "Annual Reflection & Recalibration [LifeOS]",
+    "url": "https://lu.ma/ykmluajn",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/event-covers/ro/f2477f10-5009-46ff-a88f-918694245f7e",
+    "date": "Dec 22",
+    "time": "2:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Chandiran, Siam Hossain & For Immigrants By Immigrants",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "SideQuest #18: Launch Day",
+    "url": "https://lu.ma/epdsgdxj",
+    "cover_image_url": "https://images.unsplash.com/photo-1664115170143-92dde9c5b54c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=M3wxMjQyMjF8MHwxfHNlYXJjaHw2fHx1bmJveGluZ3xlbnwwfHx8fDE3MzM4MDgxODd8Mg&ixlib=rb-4.0.3&q=80&w=360&h=360",
+    "date": "Jan 5, 2025",
+    "time": "2:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Chandiran & Anthony Hagouel",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "LFC.DEV - Hackathon v1 @ Fractal Tech",
+    "url": "https://lu.ma/olts6pug",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/iz/715dd128-cc88-40e7-bf7d-6fb8f7242007",
+    "date": "Jan 18, 2025",
+    "time": "9:30 AM",
+    "location": "Fractal Tech",
+    "organizer": "By Boris Berenberg",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "Contech Hackathon: Build Day",
+    "url": "https://lu.ma/20st2roj",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/event-covers/ui/b7a858fb-399f-46fb-a3f8-cd1ff3ea4add",
+    "date": "Jan 25, 2025",
+    "time": "8:00 AM",
+    "location": "Fractal Tech",
+    "organizer": "By Contech Alliance & Jake Zegil",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "Contech Hackathon: Topping Out",
+    "url": "https://lu.ma/oelm3ut0",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/event-covers/c7/9e4f3b78-2874-4c03-af2d-d364a0798306",
+    "date": "Jan 28, 2025",
+    "time": "5:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Contech Alliance",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  },
+  {
+    "name": "Zero-Knowledge Dive, NYC",
+    "url": "https://lu.ma/5yfk3uue",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/event-covers/j1/9866cb21-3136-45ac-911c-2ee88fcf56ea",
+    "date": "Feb 2, 2025",
+    "time": "2:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Kai Geffen",
+    "event_type": "meetup",
+    "last_updated": "2024-12-19T18:24:19.534Z"
+  }
+]
