@@ -150,4 +150,20 @@ router.post("/events/update", async (req: Request, res: Response) => {
   }
 });
 
+// Add events route
+router.get("/events", async (req: Request, res: Response) => {
+  console.log("Received request on /api/sheets/events");
+  try {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+      range: "events!A1:Z100", // Make sure you have a sheet named "events"
+    });
+    console.log("Events data retrieved:", response.data.values);
+    res.json({ data: response.data.values });
+  } catch (error) {
+    console.error("Error fetching events data:", error);
+    res.status(500).json({ error: "failed to fetch events data" });
+  }
+});
+
 export default router;
