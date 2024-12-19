@@ -1,33 +1,79 @@
 "use client";
 
 import Link from "next/link";
-import { LampDemo } from "@/components/lamp";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Illustration } from "@/components/illustration";
+// import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import { FloatingDock } from "@/components/ui/floating-dock";
+import {
+  IconBriefcase,
+  IconCalendarEvent,
+  IconNetwork,
+} from "@tabler/icons-react";
+
+export const GlowingStarsBackgroundCard = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) => {
+  const [mouseEnter, setMouseEnter] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => {
+        setMouseEnter(true);
+      }}
+      onMouseLeave={() => {
+        setMouseEnter(false);
+      }}
+      className={cn(
+        "bg-[linear-gradient(110deg,#333_0.6%,#222)] p-4 max-w-md max-h-[20rem] h-full w-full rounded-xl border border-[#eaeaea] dark:border-neutral-600",
+        className
+      )}
+    >
+      <div className="flex justify-center items-center">
+        <Illustration mouseEnter={mouseEnter} />
+      </div>
+      <div className="px-2 pb-6">{children}</div>
+    </div>
+  );
+};
 
 export default function Home() {
+  const dockItems = [
+    {
+      title: "Jobs",
+      icon: <IconBriefcase />,
+      href: "/jobs",
+    },
+    {
+      title: "Events",
+      icon: <IconCalendarEvent />,
+      href: "/events",
+    },
+    {
+      title: "Network",
+      icon: <IconNetwork />,
+      href: "/ecosystem",
+    },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8">
-      {/* <LampDemo /> */}
-      <h1 className="text-4xl font-bold mb-8">Welcome to Our Platform</h1>
-      <nav className="flex flex-col gap-4">
-        <Link
-          href="/jobs"
-          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
-        >
-          Available Jobs
-        </Link>
-        <Link
-          href="/events"
-          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
-        >
-          Events
-        </Link>
-        <Link
-          href="/partners"
-          className="text-lg text-cyan-400 hover:text-cyan-300 transition-colors"
-        >
-          Tech Partners
-        </Link>
-      </nav>
+      <GlowingStarsBackgroundCard>
+        <h1 className="text-4xl font-bold mb-8 ml-10">tech hub</h1>
+        <div className="flex justify-center">
+          <FloatingDock
+            items={dockItems}
+            desktopClassName="relative"
+            mobileClassName="relative"
+          />
+        </div>
+      </GlowingStarsBackgroundCard>
     </div>
   );
 }
