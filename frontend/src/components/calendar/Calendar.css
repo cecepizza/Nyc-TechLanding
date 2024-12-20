@@ -1,65 +1,224 @@
 /* Calendar.css */
 .fc {
-  --fc-border-color: #e2e8f0;
-  --fc-button-bg-color: #0ea5e9;
-  --fc-button-border-color: #0ea5e9;
-  --fc-button-hover-bg-color: #0284c7;
-  --fc-button-hover-border-color: #0284c7;
-  --fc-button-active-bg-color: #0284c7;
-  --fc-button-active-border-color: #0284c7;
-  --fc-event-bg-color: #0ea5e9;
-  --fc-event-border-color: #0ea5e9;
+  --fc-border-color: rgba(255, 255, 255, 0.1);
+  --fc-today-bg-color: rgba(14, 165, 233, 0.1);
+  --fc-neutral-bg-color: transparent;
+  --fc-list-event-hover-bg-color: rgba(14, 165, 233, 0.1);
+  --fc-page-bg-color: transparent;
+  position: relative;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
 }
 
-.fc .fc-toolbar-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+/* Terminal-inspired header */
+.fc-header-toolbar {
+  background: rgba(30, 30, 30, 0.9);
+  padding: 1rem;
+  border-radius: 16px;
+  margin: 0.5rem !important;
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
+/* Day cell styling */
+.fc-daygrid-day {
+  background: rgba(30, 30, 30, 0.5);
+  border: 1px solid rgba(99, 102, 241, 0.1) !important;
+  transition: all 0.2s ease;
+}
+
+.fc-daygrid-day:hover {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  border-radius: 22px !important;
+  transform: scale(0.95);
+}
+
+/* Day number styling */
+.fc-daygrid-day-number {
+  color: rgba(245, 240, 232, 0.8) !important;
+  padding: 8px !important;
+  font-family: monospace;
+}
+
+/* Column headers */
+.fc-col-header-cell {
+  background: rgba(25, 25, 25, 0.9) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  font-size: 1rem !important;
+  padding: 8px 0 !important;
+}
+
+.fc-col-header-cell-cushion {
+  color: #0ea5e9 !important;
+  font-family: monospace;
+  font-weight: 500 !important;
+}
+
+/* Toolbar buttons */
 .fc .fc-button {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  border-radius: 0.375rem;
+  background: rgba(14, 165, 233, 0.1) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  color: #f5f0e8 !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.1s ease;
+  padding: 0.5rem 1rem;
   font-weight: 500;
+  font-family: monospace;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-radius: 12px !important;
 }
 
+.fc .fc-button:hover {
+  background: rgba(14, 165, 233, 0.8) !important;
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.fc .fc-button-active {
+  background: rgba(14, 165, 233, 0.25) !important;
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
+  border-color: rgba(99, 102, 241, 0.6) !important;
+}
+
+/* Event styling */
+.fc-event {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  background: rgba(14, 165, 233, 0.15) !important;
+  transition: all 0.3s ease !important;
+  margin: 2px 4px !important;
+  border-radius: 8px !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+.fc-event:hover {
+  transform: translateY(-10px) scale(1.1) !important;
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.7);
+  background: rgba(14, 165, 233, 0.25) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.fc-event-title {
+  font-family: monospace !important;
+  padding: 2px 4px !important;
+  font-size: 1.5rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+.fc-daygrid-event {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+/* Today highlighting */
 .fc .fc-day-today {
-  background-color: #f1f5f9 !important;
+  background: rgba(14, 165, 233, 0.08) !important;
+  border: 2.5px solid rgba(99, 102, 241, 0.4) !important;
 }
 
-.fc .fc-event {
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  padding: 2px 4px;
-  margin: 1px 0;
-  cursor: pointer;
-  transition: transform 0.1s ease;
+/* Mouse follow effect */
+.fc::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  background: radial-gradient(
+    1000px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(99, 102, 241, 0.06),
+    transparent 40%
+  );
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.fc .fc-event:hover {
-  transform: scale(1.02);
+.fc:hover::before {
+  opacity: 1;
 }
 
-.fc .fc-col-header-cell {
-  padding: 0.5rem 0;
-  background-color: #f8fafc;
+/* Add this script to your Calendar component */
+
+/* Add back the month title styling */
+.fc .fc-toolbar-title {
+  color: #f5f0e8;
+  font-size: 1.75rem;
   font-weight: 600;
+  background: linear-gradient(to right, #0ea5e9, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: monospace;
+  margin: 0.5rem 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.fc .fc-daygrid-day-number {
-  font-size: 0.875rem;
-  padding: 0.5rem;
-  color: #475569;
+/* Add a subtle glow effect to the title */
+.fc .fc-toolbar-title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.1), transparent 70%);
+  z-index: -1;
+  filter: blur(8px);
 }
 
-.fc .fc-more-link {
-  font-size: 0.75rem;
-  color: #64748b;
-  font-weight: 500;
+/* Clean event display */
+.fc-event-main {
+  padding: 2px 6px !important;
 }
 
-.fc .fc-popover {
-  border-radius: 0.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+.fc-event-time {
+  display: none !important;
+}
+
+.fc-daygrid-event-dot {
+  display: none !important;
+}
+
+/* Round the corners of the calendar grid */
+.fc-scrollgrid {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+/* Round specific corners of the calendar cells */
+.fc-scrollgrid-section-header th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.fc-scrollgrid-section-header th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.fc-scrollgrid-section:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.fc-scrollgrid-section:last-child td:last-child {
+  border-bottom-right-radius: 12px;
 }

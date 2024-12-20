@@ -29,3 +29,21 @@ body {
 .terminal-icon {
   filter: opacity(0.8);
 }
+
+.calendar-container .fc {
+  --fc-border-color: rgba(255, 255, 255, 0.1);
+  --fc-today-bg-color: rgba(14, 165, 233, 0.1);
+  --fc-neutral-bg-color: transparent;
+  --fc-list-event-hover-bg-color: rgba(14, 165, 233, 0.1);
+  --fc-page-bg-color: transparent;
+}
+
+.calendar-container .fc-event {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(14, 165, 233, 0.2);
+}
+
+.calendar-container .fc-toolbar-title {
+  color: #F5F0E8;
+}
