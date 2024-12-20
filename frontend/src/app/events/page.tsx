@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-
+import { CalendarComponent } from "@/components/calendar/Calendar";
+import "@/components/calendar/Calendar.css";
+import { Boxes } from "@/components/ui/background-boxes";
 interface Event {
   name: string;
   date: string;
-  time: string;
+  duration: string;
   location: string;
   organizer: string;
   url: string | null;
@@ -15,6 +17,17 @@ interface Event {
   event_type: string;
   last_updated: string;
 }
+
+// Consistent color palette with the main page
+const colors = {
+  primary: "#1E293B", // Dark blue-gray
+  secondary: "#64748B", // Cool gray
+  accent1: "#0EA5E9", // Sky blue
+  accent2: "#10B981", // Emerald green
+  accent3: "#F43F5E", // Rose red
+  background: "#F1F5F9", // Light gray
+  border: "#E2E8F0", // Light border gray
+};
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -31,7 +44,7 @@ export default function Events() {
         const eventsData = (data.data?.slice(1) || []).map((row: string[]) => ({
           name: row[0] || "",
           date: row[1] || "",
-          time: row[2] || "",
+          duration: row[2] || "",
           organizer: row[3] || "",
           location: row[4] || "",
           url: row[5] || null,
@@ -52,88 +65,106 @@ export default function Events() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-700 flex items-center justify-center">
         <div className="text-cyan-400 text-xl">Loading events...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-bold text-center mb-12 text-cyan-400 tracking-tight">
-          NYC Tech Events
+    <div className="relative bg-slate-700 p-2">
+      <Boxes className="absolute inset-2 z-0" />
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-center mb-12 text-[#1E293B]">
+          Tech Events Hub
         </h1>
+        <CalendarComponent />
+      </div>
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {events.map((event, index) => (
+          <Card
+            key={index}
+            className="bg-white border border-[#E2E8F0] 
+                        rounded-lg shadow-md hover:shadow-lg transition-shadow"
+          >
+            {event.cover_image_url && (
+              <div className="relative">
+                <img
+                  src={event.cover_image_url}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-t-lg"
+                />
+              </div>
+            )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {events.map((event, index) => (
-            <Card
-              key={index}
-              className="bg-slate-800 border-2 border-cyan-500/50 hover:border-cyan-400 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
-            >
-              {event.cover_image_url && (
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <img
-                    src={event.cover_image_url}
-                    alt={event.name}
-                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-
+            <div className="p-6">
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-cyan-300 line-clamp-2 hover:line-clamp-none">
+                <CardTitle className="text-xl font-semibold text-[#1E293B]">
                   {event.name}
                 </CardTitle>
               </CardHeader>
 
-              <CardContent className="space-y-4">
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-2 text-cyan-200">
-                    <Calendar className="w-4 h-4 text-cyan-400" />
-                    <span>{event.date}</span>
-                  </div>
-
-                  {event.time && (
-                    <div className="flex items-center gap-2 text-cyan-200">
-                      <Clock className="w-4 h-4 text-cyan-400" />
-                      <span>{event.time}</span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2 text-cyan-200">
-                    <MapPin className="w-4 h-4 text-cyan-400" />
-                    <span>{event.location}</span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-cyan-200">
-                    <User className="w-4 h-4 text-cyan-400" />
-                    <span>{event.organizer}</span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-cyan-200">
-                    <Tag className="w-4 h-4 text-cyan-400" />
-                    <span className="px-2 py-1 bg-cyan-900/50 rounded-full text-sm">
-                      {event.event_type}
-                    </span>
-                  </div>
-                </div>
-
+              <CardContent className="space-y-3 mt-4">
+                <InfoRow
+                  icon={<Calendar className="w-5 h-5 text-[#0EA5E9]" />}
+                  text={event.date}
+                  type="date"
+                />
+                {event.duration && (
+                  <InfoRow
+                    icon={<Clock className="w-5 h-5 text-[#10B981]" />}
+                    text={event.duration}
+                    type="duration"
+                  />
+                )}
+                <InfoRow
+                  icon={<User className="w-5 h-5 text-[#F43F5E]" />}
+                  text={event.organizer}
+                  type="organizer"
+                />
+                <InfoRow
+                  icon={<MapPin className="w-5 h-5 text-[#64748B]" />}
+                  text={event.location}
+                  type="location"
+                />
+                <InfoRow
+                  icon={<Tag className="w-5 h-5 text-[#64748B]" />}
+                  text={event.event_type}
+                  type="tag"
+                />
                 {event.url && (
                   <a
                     href={event.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg transition-colors duration-300"
+                    className="inline-flex items-center gap-2 mt-4 px-4 py-2 
+                               bg-[#0EA5E9] text-white rounded-md font-medium
+                               hover:bg-[#0284C7] transition-colors"
                   >
-                    View Event <ExternalLink className="w-4 h-4" />
+                    View Event <ExternalLink className="w-5 h-5" />
                   </a>
                 )}
               </CardContent>
-            </Card>
-          ))}
-        </div>
+            </div>
+          </Card>
+        ))}
       </div>
     </div>
   );
 }
+
+// Update InfoRow component
+const InfoRow = ({
+  icon,
+  text,
+  type,
+}: {
+  icon: React.ReactNode;
+  text: string;
+  type: string;
+}) => (
+  <div className="flex items-center gap-3 text-[#1E293B]">
+    <span>{icon}</span>
+    <span>{text}</span>
+  </div>
+);
