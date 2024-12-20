@@ -1,60 +1,44 @@
 // src/components/calendar/Calendar.tsx
-import React, { useState, useEffect } from "react";
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Card } from "@/components/ui/card";
-import { EventDetailsDialog } from "./EventDetailsDialog";
 import { useEvents } from "./hooks/useEvents";
-import { CalendarEvent } from "./types";
 import ShineBorder from "@/components/ui/shine-border";
 
-export const CalendarComponent = () => {
-  const { events, loading } = useEvents();
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(
-    null
-  );
+interface CalendarProps {
+  onEventClick: (event: any) => void;
+}
 
-  const handleEventClick = (clickInfo: { event: any }) => {
-    const { title, start, end, extendedProps } = clickInfo.event;
-    setSelectedEvent({
-      title,
-      start,
-      end,
-      extendedProps,
-    });
+export const CalendarComponent: React.FC<CalendarProps> = ({
+  onEventClick,
+}) => {
+  const { events, loading } = useEvents();
+  const [selectedEvent, setSelectedEvent] = React.useState(null);
+
+  const handleEventClick = (clickInfo: any) => {
+    const event = {
+      name: clickInfo.event.title,
+      date: clickInfo.event.start.toLocaleDateString(),
+      time: clickInfo.event.start.toLocaleTimeString(),
+      organizer: clickInfo.event.extendedProps.organizer,
+      location: clickInfo.event.extendedProps.location,
+      url: clickInfo.event.extendedProps.url,
+      cover_image_url: clickInfo.event.extendedProps.coverImage,
+      event_type: clickInfo.event.extendedProps.eventType,
+    };
+    setSelectedEvent(event);
+    onEventClick(event);
   };
 
-  useEffect(() => {
-    const calendar = document.querySelector<HTMLElement>(".fc");
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      (e.currentTarget as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
-      (e.currentTarget as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
-    };
-
-    calendar?.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      calendar?.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-cyan-400 text-xl">Loading events...</div>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className="p-4 max-w-5xl mx-auto">
+    <div className="p-4 max-w-7xl mx-auto">
       <ShineBorder
         borderRadius={36}
         borderWidth={12.5}
@@ -84,12 +68,9 @@ export const CalendarComponent = () => {
                 minute: undefined,
                 meridiem: false,
               }}
-              // Custom styling
               contentHeight="auto"
               aspectRatio={1.8}
-              // Better event styling
               eventClassNames="px-2 py-1 rounded-md text-sm font-medium"
-              // Header styling
               titleFormat={{ year: "numeric", month: "long" }}
               buttonText={{
                 today: "Today",
@@ -97,7 +78,6 @@ export const CalendarComponent = () => {
                 week: "Week",
                 day: "Day",
               }}
-              // View specific options
               views={{
                 dayGrid: {
                   dayMaxEventRows: 3,
@@ -125,11 +105,6 @@ export const CalendarComponent = () => {
           </div>
         </Card>
       </ShineBorder>
-
-      <EventDetailsDialog
-        event={selectedEvent}
-        onClose={() => setSelectedEvent(null)}
-      />
     </div>
   );
 };
