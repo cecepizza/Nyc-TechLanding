@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { CalendarComponent } from "@/components/calendar/Calendar";
+import "@/components/calendar/Calendar.css";
 
 interface Event {
   name: string;
@@ -75,6 +77,7 @@ export default function Events() {
         <h1 className="text-5xl font-bold text-center mb-12 text-[#1E293B]">
           Tech Events Hub
         </h1>
+        <CalendarComponent />
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {events.map((event, index) => (
