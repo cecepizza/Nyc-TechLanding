@@ -13,6 +13,7 @@ import {
   IconNetwork,
 } from "@tabler/icons-react";
 import { MarqueeDemo } from "@/components/magicui/marqueeInfo";
+import { Boxes } from "@/components/ui/background-boxes";
 
 export const GlowingStarsBackgroundCard = ({
   className,
@@ -67,11 +68,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center z-10">
+        tech hub
+      </h1>
       <GlowingStarsBackgroundCard>
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          tech hub
-        </h1>
-        <div className="flex flex-col gap-8 max-w-7xl mx-auto">
+        {/* <Boxes className="z-0" /> */}
+        <div className="flex flex-col gap-8 max-w-7xl mx-auto z-10">
           <div className="flex justify-center">
             <FloatingDock
               items={dockItems}
@@ -79,9 +81,7 @@ export default function Home() {
               mobileClassName="relative"
             />
           </div>
-          <div className="w-full">
-            <MarqueeDemo />
-          </div>
+          <div className="w-full">{/* <MarqueeDemo /> */}</div>
         </div>
       </GlowingStarsBackgroundCard>
     </div>
