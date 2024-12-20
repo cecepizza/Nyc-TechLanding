@@ -88,9 +88,6 @@ export default function Home() {
               mobileClassName="relative"
             />
           </div>
-          <div className="w-full">
-            <CalendarComponent events={events} />
-          </div>
         </div>
       </GlowingStarsBackgroundCard>
     </div>

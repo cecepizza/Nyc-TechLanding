@@ -16,7 +16,7 @@ export const CalendarComponent = () => {
     null
   );
 
-  const handleEventClick = (clickInfo: any) => {
+  const handleEventClick = (clickInfo: { event: any }) => {
     const { title, start, end, extendedProps } = clickInfo.event;
     setSelectedEvent({
       title,
@@ -27,7 +27,7 @@ export const CalendarComponent = () => {
   };
 
   useEffect(() => {
-    const calendar = document.querySelector(".fc");
+    const calendar = document.querySelector<HTMLElement>(".fc");
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -56,9 +56,9 @@ export const CalendarComponent = () => {
   return (
     <div className="p-4 max-w-5xl mx-auto">
       <ShineBorder
-        borderRadius={16}
-        borderWidth={3.5}
-        duration={8}
+        borderRadius={36}
+        borderWidth={12.5}
+        duration={30}
         color={["rgba(14, 165, 233, 0.3)", "rgba(99, 102, 241, 0.3)"]}
         className="w-full bg-transparent"
       >
