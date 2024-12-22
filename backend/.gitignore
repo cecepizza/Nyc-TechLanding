@@ -179,3 +179,5 @@ dist
 *.key 
 
 */credentials.json
+
+index.js
