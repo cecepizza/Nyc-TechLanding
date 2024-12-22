@@ -10,6 +10,7 @@ import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import Marquee from "@/components/ui/marquee";
 import "@/components/calendar/Calendar.css";
 import { motion } from "framer-motion";
+import { config } from "@/config";
 
 interface Event {
   name: string;
@@ -31,7 +32,7 @@ export default function Events() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const response = await fetch("/api/sheets/events");
+        const response = await fetch(config.backendUrl + "/api/sheets/events");
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
