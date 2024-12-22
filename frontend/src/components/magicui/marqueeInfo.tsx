@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import Marquee from "@/components/ui/marquee";
+import { config } from "@/config";
 
 interface Job {
   title: string;
@@ -38,7 +39,7 @@ export function MarqueeDemo() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await fetch("/api/sheets/jobs");
+        const response = await fetch(config.backendUrl + "/api/sheets/jobs");
         const data = await response.json();
 
         // Transform sheet data into Job objects

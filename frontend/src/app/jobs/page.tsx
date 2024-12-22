@@ -1,4 +1,5 @@
 "use client";
+import { config } from "@/config";
 import React, { useEffect, useState } from "react";
 
 export default function Jobs() {
@@ -7,7 +8,7 @@ export default function Jobs() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await fetch("/api/sheets/jobs");
+        const response = await fetch(config.backendUrl + "/api/sheets/jobs");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

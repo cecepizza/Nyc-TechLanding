@@ -1,4 +1,5 @@
 "use client";
+import { config } from "@/config";
 import React, { useEffect, useState } from "react";
 
 export default function Ecosystem() {
@@ -18,9 +19,14 @@ export default function Ecosystem() {
 
         // Update your fetch calls
         const [startupsRes, vcsRes, acceleratorsRes] = await Promise.all([
-          fetch(`/api/sheets/startups?id=${SHEET_IDS.startups}`),
-          fetch(`/api/sheets/vcs?id=${SHEET_IDS.vcs}`),
-          fetch(`/api/sheets/accelerators?id=${SHEET_IDS.accelerators}`),
+          fetch(
+            config.backendUrl + `/api/sheets/startups?id=${SHEET_IDS.startups}`
+          ),
+          fetch(config.backendUrl + `/api/sheets/vcs?id=${SHEET_IDS.vcs}`),
+          fetch(
+            config.backendUrl +
+              `/api/sheets/accelerators?id=${SHEET_IDS.accelerators}`
+          ),
         ]);
 
         const startupsData = await startupsRes.json();

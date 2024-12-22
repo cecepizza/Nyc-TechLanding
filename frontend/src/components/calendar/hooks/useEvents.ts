@@ -1,6 +1,7 @@
 // src/components/calendar/hooks/useEvents.ts
 import { useState, useEffect } from "react";
 import { Event, CalendarEvent } from "../types";
+import { config } from "@/config";
 
 export const useEvents = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -9,7 +10,7 @@ export const useEvents = () => {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const response = await fetch("/api/sheets/events");
+        const response = await fetch(config.backendUrl + "/api/sheets/events");
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
