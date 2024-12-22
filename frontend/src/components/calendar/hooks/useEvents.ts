@@ -28,7 +28,7 @@ export const useEvents = () => {
         }));
 
         // Convert to Calendar Events
-        const calendarEvents = eventsData.map((event) => {
+        const calendarEvents = eventsData.map((event: Event) => {
           // Parse date and time
           const dateStr = event.date.replace(",", ""); // Remove any commas
           const dateTime = new Date(`${dateStr} ${event.time}`);

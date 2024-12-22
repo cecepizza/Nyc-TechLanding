@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CalendarComponent } from "@/components/calendar/Calendar";
@@ -9,6 +9,7 @@ import { Boxes } from "@/components/ui/background-boxes";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import Marquee from "@/components/ui/marquee";
 import "@/components/calendar/Calendar.css";
+import { motion } from "framer-motion";
 
 interface Event {
   name: string;
@@ -26,7 +27,6 @@ export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const selectedCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -47,7 +47,8 @@ export default function Events() {
           last_updated: row[8] || "",
         }));
         eventsData.sort(
-          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          (a: Event, b: Event) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime()
         );
         setEvents(eventsData);
       } catch (error) {
@@ -64,134 +65,154 @@ export default function Events() {
     setSelectedEvent(event);
   };
 
-  const handleClose = () => {
-    setSelectedEvent(null);
-    if (selectedCardRef.current) {
-      selectedCardRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-700 flex items-center justify-center">
-        <div className="text-cyan-400 text-xl">Loading events...</div>
-      </div>
-    );
-  }
-
   return (
-    <div className="relative bg-slate-700 min-h-screen p-2">
+    <div className="relative bg-slate-800 min-h-screen p-2">
       <Boxes className="absolute inset-2 z-0" />
-      <div className="relative z-10 max-w-7xl mx-auto space-y-8">
-        <h1 className="text-5xl font-bold text-center py-8 text-white">
+
+      <div className="relative z-10 max-w-6xl mx-auto space-y-8">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.05 }}
+          className="text-4xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
+        >
           Tech Events Hub
-        </h1>
+        </motion.h1>
 
-        <CalendarComponent onEventClick={handleCalendarEventClick} />
-
-        <div className="overflow-hidden">
-          <Marquee pauseOnHover className="py-4">
-            <div className="flex gap-6 px-6">
-              {events.map((event, index) => (
-                <div
-                  key={index}
-                  className="w-[320px] h-[420px] flex items-center justify-center"
-                  ref={
-                    selectedEvent?.name === event.name ? selectedCardRef : null
-                  }
-                >
-                  <CardContainer containerClassName="w-full h-full">
-                    <CardBody className="w-full h-full">
-                      <CardItem>
-                        <EventCard event={event} />
-                      </CardItem>
-                    </CardBody>
-                  </CardContainer>
-                </div>
-              ))}
+        {loading ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center justify-center py-20 space-y-4"
+          >
+            <div className="flex space-x-2">
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" />
             </div>
-          </Marquee>
-        </div>
-      </div>
-
-      <SlidingCard isOpen={!!selectedEvent} onClose={handleClose}>
-        {selectedEvent && <EventCard event={selectedEvent} />}
-      </SlidingCard>
-    </div>
-  );
-}
-
-const EventCard = ({ event }: { event: Event }) => (
-  <Card
-    className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg 
-                 shadow-xl hover:shadow-2xl transition-all duration-300 
-                 w-[300px] h-[400px] overflow-hidden"
-  >
-    <div className="absolute inset-0 flex flex-col">
-      <div className="h-[160px] flex-shrink-0">
-        {event.cover_image_url ? (
-          <img
-            src={event.cover_image_url}
-            alt=""
-            className="w-full h-full object-cover"
-          />
+            <div className="text-cyan-400 text-lg">Loading events...</div>
+          </motion.div>
         ) : (
-          <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-700" />
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <CalendarComponent onEventClick={handleCalendarEventClick} />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="overflow-hidden"
+            >
+              <Marquee pauseOnHover className="py-4">
+                <div className="flex gap-6 px-6">
+                  {events.map((event, index) => (
+                    <div
+                      key={index}
+                      className="w-[320px] h-[420px] flex items-center justify-center"
+                    >
+                      <CardContainer containerClassName="w-full h-full">
+                        <CardBody className="w-full h-full">
+                          <CardItem>
+                            <EventCard event={event} />
+                          </CardItem>
+                        </CardBody>
+                      </CardContainer>
+                    </div>
+                  ))}
+                </div>
+              </Marquee>
+            </motion.div>
+          </>
         )}
       </div>
 
-      <div className="flex-1 p-4 flex flex-col">
-        <CardHeader className="p-0 mb-3">
-          <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2">
-            {event.name}
-          </CardTitle>
-        </CardHeader>
+      <SlidingCard
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        event={selectedEvent}
+      />
+    </div>
+  );
+}
+const EventCard = ({ event }: { event: Event }) => (
+  <Card
+    className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg 
+                   shadow-xl hover:shadow-2xl transition-all duration-300 
+                   w-[300px] h-[400px]"
+  >
+    {/* Image Section */}
+    <div className="h-[160px] flex-shrink-0">
+      {event.cover_image_url ? (
+        <img
+          src={event.cover_image_url}
+          alt=""
+          className="w-full h-full object-cover rounded-t-lg"
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-700 rounded-t-lg" />
+      )}
+    </div>
 
-        <CardContent className="p-0 flex-1 flex flex-col">
-          <div className="space-y-2 flex-1">
+    {/* Content Section */}
+    <div className="p-4 flex flex-col h-[240px]">
+      {" "}
+      {/* Fixed height for content */}
+      <CardHeader className="p-0 mb-3">
+        <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2">
+          {event.name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-0 flex flex-col h-full">
+        <div className="space-y-2 mb-auto">
+          {" "}
+          {/* Push content up */}
+          <InfoRow
+            icon={<Calendar className="w-4 h-4 text-cyan-400" />}
+            text={event.date}
+          />
+          {event.duration && (
             <InfoRow
-              icon={<Calendar className="w-4 h-4 text-cyan-400" />}
-              text={event.date}
+              icon={<Clock className="w-4 h-4 text-emerald-400" />}
+              text={event.duration}
             />
-            {event.duration && (
-              <InfoRow
-                icon={<Clock className="w-4 h-4 text-emerald-400" />}
-                text={event.duration}
-              />
-            )}
-            <InfoRow
-              icon={<User className="w-4 h-4 text-rose-400" />}
-              text={truncateText(event.organizer, 30)}
-            />
-            <InfoRow
-              icon={<MapPin className="w-4 h-4 text-violet-400" />}
-              text={event.location}
-            />
-            <InfoRow
-              icon={<Tag className="w-4 h-4 text-amber-400" />}
-              text={event.event_type}
-            />
-          </div>
+          )}
+          <InfoRow
+            icon={<User className="w-4 h-4 text-rose-400" />}
+            text={truncateText(event.organizer, 30)}
+          />
+          <InfoRow
+            icon={<MapPin className="w-4 h-4 text-violet-400" />}
+            text={event.location}
+          />
+          <InfoRow
+            icon={<Tag className="w-4 h-4 text-amber-400" />}
+            text={event.event_type}
+          />
+        </div>
 
-          {event.url && (
-            <div className="mt-4 z-10">
-              <a
-                href={event.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 
+        {/* Button always at bottom */}
+        {event.url && (
+          <div className="pt-2 relative">
+            <a
+              href={event.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 
                          bg-cyan-500 hover:bg-cyan-600 text-white rounded-md 
                          font-medium text-sm transition-all duration-200
-                         hover:translate-y-[-1px] active:translate-y-0
-                         cursor-pointer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                View Event <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
-          )}
-        </CardContent>
-      </div>
+                         hover:translate-y-[-1px] active:translate-y-0"
+              onClick={(e) => e.stopPropagation()}
+            >
+              View Event <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+      </CardContent>
     </div>
   </Card>
 );

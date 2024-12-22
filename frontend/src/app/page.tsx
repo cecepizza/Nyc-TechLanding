@@ -15,7 +15,7 @@ import { MarqueeDemo } from "@/components/magicui/marqueeInfo";
 import { Boxes } from "@/components/ui/background-boxes";
 import { CalendarComponent } from "@/components/calendar/Calendar";
 
-export const GlowingStarsBackgroundCard = ({
+const GlowingStarsBackgroundCard = ({
   className,
   children,
 }: {
