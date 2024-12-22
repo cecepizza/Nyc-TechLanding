@@ -177,3 +177,5 @@ dist
 ./routes/credentials.json
 *.pem
 *.key 
+
+*/credentials.json
