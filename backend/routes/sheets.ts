@@ -4,7 +4,7 @@ import { google } from "googleapis";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import { config } from "../config";
+import { config } from "../config.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
