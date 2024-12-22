@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "bun --watch index.ts",
     "zipCreds": "node -e \"console.log('\\n\\nGOOGLE_CREDENTIALS=' + Buffer.from(JSON.stringify(require('./routes/credentials.json'))).toString('base64'))\" >> .env",
-    "build": "bun build --target node api/index.ts --outfile=api/index.js"
+    "build": "bun build --target node index.ts --outfile=api/index.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
