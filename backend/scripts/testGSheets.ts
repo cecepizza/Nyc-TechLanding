@@ -1,13 +1,13 @@
 // test-credentials.js
 require("dotenv").config();
 import { google } from "googleapis";
-import credentials from "../routes/credentials.json";
+import { config } from "../config";
 
 async function testCredentials() {
   try {
     // Initialize auth
     const auth = new google.auth.GoogleAuth({
-      credentials: credentials,
+      credentials: config.credentials,
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 

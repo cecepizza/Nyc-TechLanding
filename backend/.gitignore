@@ -174,6 +174,6 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
-credentials.json
+./routes/credentials.json
 *.pem
 *.key 
