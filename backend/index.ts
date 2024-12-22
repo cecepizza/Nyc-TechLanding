@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import type { Request, Response, ErrorRequestHandler } from "express";
-import eventsRouter from "../routes/events.ts";
-import sheetsRouter from "../routes/sheets.ts";
+import eventsRouter from "./routes/events.ts";
+import sheetsRouter from "./routes/sheets.ts";
 
 dotenv.config();
 
