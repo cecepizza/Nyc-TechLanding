@@ -46,5 +46,3 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`server is a success on http://localhost:${port}`);
 });
-
-module.exports = app;

@@ -10,8 +10,7 @@
   },
   "scripts": {
     "dev": "bun --watch index.ts",
-    "zipCreds": "node -e \"console.log('\\n\\nGOOGLE_CREDENTIALS=' + Buffer.from(JSON.stringify(require('./routes/credentials.json'))).toString('base64'))\" >> .env",
-    "build": "echo 'MWEKWJEFKL:SEDJFKLS'"
+    "zipCreds": "node -e \"console.log('\\n\\nGOOGLE_CREDENTIALS=' + Buffer.from(JSON.stringify(require('./routes/credentials.json'))).toString('base64'))\" >> .env"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
