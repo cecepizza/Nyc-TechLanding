@@ -3,8 +3,8 @@ import express from "express";
 import { google } from "googleapis";
 import path from "path";
 import { fileURLToPath } from "url";
-import credentials from "./credentials.json";
 import fs from "fs";
+import { config } from "../config";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,7 +16,7 @@ console.log("initializing gsheets API router");
 
 // initialize the google sheets api
 const auth = new google.auth.GoogleAuth({
-  credentials: credentials,
+  credentials: config.credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 

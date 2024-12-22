@@ -8,6 +8,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "scripts": {
+    "dev": "bun --watch index.ts",
+    "zipCreds": "node -e \"console.log('\\n\\nGOOGLE_CREDENTIALS=' + Buffer.from(JSON.stringify(require('./routes/credentials.json'))).toString('base64'))\" >> .env"
+  },
   "dependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
