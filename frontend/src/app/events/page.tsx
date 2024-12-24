@@ -11,6 +11,7 @@ import Marquee from "@/components/ui/marquee";
 import "@/components/calendar/Calendar.css";
 import { motion } from "framer-motion";
 import { config } from "@/config";
+import { LampContainer } from "@/components/lamp";
 
 interface Event {
   name: string;
@@ -67,77 +68,79 @@ export default function Events() {
   };
 
   return (
-    <div className="relative bg-slate-800 min-h-screen p-2">
-      <Boxes className="absolute inset-2 z-0" />
+    <LampContainer>
+      <div className="relative bg-slate-800 min-h-screen p-2">
+        <Boxes className="absolute inset-2 z-0" />
 
-      <div className="relative z-10 max-w-6xl mx-auto space-y-8">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          whileHover={{ scale: 1.05 }}
-          className="text-4xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
-        >
-          Tech Events Hub
-        </motion.h1>
-
-        {loading ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center py-20 space-y-4"
+        <div className="relative z-10 max-w-6xl mx-auto space-y-8">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            className="text-4xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
           >
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" />
-            </div>
-            <div className="text-cyan-400 text-lg">Loading events...</div>
-          </motion.div>
-        ) : (
-          <>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <CalendarComponent onEventClick={handleCalendarEventClick} />
-            </motion.div>
+            Tech Events Hub
+          </motion.h1>
 
+          {loading ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="overflow-hidden"
+              className="flex flex-col items-center justify-center py-20 space-y-4"
             >
-              <Marquee pauseOnHover className="py-4">
-                <div className="flex gap-6 px-6">
-                  {events.map((event, index) => (
-                    <div
-                      key={index}
-                      className="w-[320px] h-[420px] flex items-center justify-center"
-                    >
-                      <CardContainer containerClassName="w-full h-full">
-                        <CardBody className="w-full h-full">
-                          <CardItem>
-                            <EventCard event={event} />
-                          </CardItem>
-                        </CardBody>
-                      </CardContainer>
-                    </div>
-                  ))}
-                </div>
-              </Marquee>
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" />
+              </div>
+              <div className="text-cyan-400 text-lg">Loading events...</div>
             </motion.div>
-          </>
-        )}
-      </div>
+          ) : (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <CalendarComponent onEventClick={handleCalendarEventClick} />
+              </motion.div>
 
-      <SlidingCard
-        isOpen={!!selectedEvent}
-        onClose={() => setSelectedEvent(null)}
-        event={selectedEvent}
-      />
-    </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="overflow-hidden"
+              >
+                <Marquee pauseOnHover className="py-4">
+                  <div className="flex gap-6 px-6">
+                    {events.map((event, index) => (
+                      <div
+                        key={index}
+                        className="w-[320px] h-[420px] flex items-center justify-center"
+                      >
+                        <CardContainer containerClassName="w-full h-full">
+                          <CardBody className="w-full h-full">
+                            <CardItem>
+                              <EventCard event={event} />
+                            </CardItem>
+                          </CardBody>
+                        </CardContainer>
+                      </div>
+                    ))}
+                  </div>
+                </Marquee>
+              </motion.div>
+            </>
+          )}
+        </div>
+
+        <SlidingCard
+          isOpen={!!selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+          event={selectedEvent}
+        />
+      </div>
+    </LampContainer>
   );
 }
 const EventCard = ({ event }: { event: Event }) => (

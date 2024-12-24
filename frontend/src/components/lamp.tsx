@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export function LampDemo() {
+export function LampDemo({ children }: { children: React.ReactNode }) {
   return (
     <LampContainer>
       <motion.h1
@@ -20,10 +20,10 @@ export function LampDemo() {
           className="text-4xl font-bold tracking-tight"
           style={{ textShadow: "4px 0 #00008b" }}
         >
-          fractal tech
+          Tech Events Hub
         </h1>
-        In touch with tech <br />
       </motion.h1>
+      {children}
     </LampContainer>
   );
 }
@@ -38,7 +38,7 @@ export const LampContainer = ({
   return (
     <div
       className={cn(
-        "h-[150vh] flex-col items-center justify-start overflow-hidden bg-[#6b6b8d] w-full rounded-md z-0 border-4 border-blue-800",
+        "h-full flex-col items-center justify-start overflow-hidden bg-[#6b6b8d] w-full rounded-md z-0 border-4 border-blue-800",
         className
       )}
       style={{ fontFamily: "'Futura', 'Helvetica', sans-serif" }}
