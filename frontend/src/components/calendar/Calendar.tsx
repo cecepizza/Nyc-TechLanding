@@ -2,7 +2,6 @@
 import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Card } from "@/components/ui/card";
 import { useEvents } from "./hooks/useEvents";
@@ -61,12 +60,20 @@ export const CalendarComponent: React.FC<CalendarProps> = ({
         <Card className="bg-transparent border-none shadow-none overflow-hidden">
           <div className="p-4">
             <FullCalendar
-              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              plugins={[dayGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
               headerToolbar={{
-                left: "prev,next today",
+                left: "prev,next",
                 center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay",
+                right: "addEventButton",
+              }}
+              customButtons={{
+                addEventButton: {
+                  text: "Add Event",
+                  click: () => {
+                    window.open("https://tally.so/create", "_blank");
+                  },
+                },
               }}
               events={events}
               eventClick={handleEventClick}
@@ -98,20 +105,6 @@ export const CalendarComponent: React.FC<CalendarProps> = ({
               buttonText={{
                 today: "Today",
                 month: "Month",
-                week: "Week",
-                day: "Day",
-              }}
-              views={{
-                dayGrid: {
-                  dayMaxEventRows: 3,
-                  moreLinkText: (n) => `+${n} more`,
-                  moreLinkClick: "popover",
-                },
-                timeGrid: {
-                  dayMaxEventRows: 3,
-                  moreLinkText: (n) => `+${n} more`,
-                  moreLinkClick: "popover",
-                },
               }}
               eventContent={(eventInfo) => {
                 const formattedTime = eventInfo.event.start?.toLocaleTimeString(
