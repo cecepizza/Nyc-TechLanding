@@ -13,6 +13,17 @@ interface CalendarProps {
   onEventClick: (event: any) => void;
 }
 
+function getRandomColor() {
+  const colors = [
+    "bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400",
+    "bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400",
+    "bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400",
+    "bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400",
+    "bg-gradient-to-r from-emerald-400 via-green-400 to-lime-400",
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
 export const CalendarComponent: React.FC<CalendarProps> = ({
   onEventClick,
 }) => {
@@ -72,22 +83,10 @@ export const CalendarComponent: React.FC<CalendarProps> = ({
               contentHeight="auto"
               aspectRatio={1.8}
               eventClassNames={(eventInfo) => {
-                const colors = [
-                  "bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400",
-                  "bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400",
-                  "bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400",
-                  "bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400",
-                  "bg-gradient-to-r from-emerald-400 via-green-400 to-lime-400",
-                ];
-
-                // Pick a random color for each event
-                const colorIndex = Math.floor(Math.random() * colors.length);
-                const colorClass = colors[colorIndex];
-
+                const colorClass = getRandomColor();
                 console.log(
                   `Event: ${eventInfo.event.title}, Color: ${colorClass}`
                 );
-
                 return [
                   "px-3 py-2 rounded-lg font-medium shadow-lg backdrop-blur-sm",
                   "hover:scale-[1.02] hover:-translate-y-[2px] hover:shadow-xl",

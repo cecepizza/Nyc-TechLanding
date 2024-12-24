@@ -92,7 +92,7 @@
 .fc-event {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(99, 102, 241, 0.3) !important;
-  background: rgba(14, 165, 233, 0.15) !important;
+  /* background: rgba(14, 165, 233, 0.15) !important; */
   transition: all 0.3s ease !important;
   margin: 2px 4px !important;
   border-radius: 8px !important;
@@ -103,8 +103,8 @@
 .fc-event:hover {
   transform: translateY(-10px) scale(1.1) !important;
   box-shadow: 0 5px 15px rgba(14, 165, 233, 0.7);
-  background: rgba(14, 165, 233, 0.25) !important;
   border-color: rgba(99, 102, 241, 0.5) !important;
+  filter: brightness(1.35);
 }
 
 .fc-event-title {
