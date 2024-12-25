@@ -9,6 +9,7 @@ import { ExternalLink } from "lucide-react";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState<string[][]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     async function fetchJobs() {
@@ -28,23 +29,39 @@ export default function Jobs() {
     fetchJobs();
   }, []);
 
+  const filteredJobs = jobs
+    .slice(1)
+    .filter((job) =>
+      job.some((field) =>
+        field.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+
   return (
     <LampContainer>
       <div className="relative bg-slate-900 min-h-screen p-4">
         <Boxes className="absolute inset-2 z-0" />
 
         <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            className="text-4xl font-semibold text-center mt-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
-          >
-            Job Market
-          </motion.h1>
+          <div className="flex justify-between items-center">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
+              className="text-4xl font-semibold text-center mt-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
+            >
+              Job Market
+            </motion.h1>
+            <input
+              type="text"
+              placeholder="Search job types..."
+              className="p-2 border border-cyan-500 rounded-md text-black"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
           <div className="jobs-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {jobs.slice(1).map((job, index) => (
+            {filteredJobs.map((job, index) => (
               <CardContainer
                 key={index}
                 containerClassName="p-0 flex justify-center"
