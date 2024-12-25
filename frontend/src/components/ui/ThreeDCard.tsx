@@ -86,7 +86,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-64 w-64 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
         className
       )}
     >
@@ -150,9 +150,9 @@ export const CardItem = ({
       <div
         className="absolute inset-0 bg-slate-800 rounded-lg"
         style={{
-          transform: "translateZ(10px)",
+          transform: "translateZ(5px)",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          border: "1px solid rgba(0, 255, 255, 0.3)",
+          border: "2px solid rgba(0, 255, 255, 0.3)",
         }}
       >
         {children}
@@ -164,25 +164,25 @@ export const CardItem = ({
         }}
       />
       <div
-        className="absolute inset-x-0 top-0 h-2 bg-slate-700 rounded-t-lg"
+        className="absolute inset-x-0 top-0 h-2 p-2 bg-slate-700 rounded-lg"
         style={{
           transform: "translateY(-10px) rotateX(90deg)",
         }}
       />
       <div
-        className="absolute inset-x-0 bottom-0 h-2 bg-slate-700 rounded-b-lg"
+        className="absolute inset-x-0 bottom-0 h-2 p-2 bg-slate-700 rounded-lg"
         style={{
           transform: "translateY(10px) rotateX(90deg)",
         }}
       />
       <div
-        className="absolute inset-y-0 left-0 w-2 bg-slate-700 rounded-l-lg"
+        className="absolute inset-y-0 left-0 w-2 p-2 bg-slate-700 rounded-lg"
         style={{
           transform: "translateX(-10px) rotateY(90deg)",
         }}
       />
       <div
-        className="absolute inset-y-0 right-0 w-2 bg-slate-700 rounded-r-lg"
+        className="absolute inset-y-0 right-0 w-2 p-2 bg-slate-700 rounded-lg"
         style={{
           transform: "translateX(10px) rotateY(90deg)",
         }}
