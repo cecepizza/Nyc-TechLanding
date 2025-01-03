@@ -6,7 +6,7 @@ const navLinks = [
   { label: "Home", path: "/", key: "Home" },
   { label: "Jobs", path: "/jobs", key: "Jobs" },
   { label: "Events", path: "/events", key: "Events" },
-  { label: "Ecosystem", path: "/ecosystem", key: "Ecosystem" },
+  { label: "Network", path: "/ecosystem", key: "Ecosystem" },
 ];
 
 const NavBar = memo(
