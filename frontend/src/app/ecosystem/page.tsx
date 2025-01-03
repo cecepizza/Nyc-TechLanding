@@ -1,6 +1,8 @@
 "use client";
 import { config } from "@/config";
 import React, { useEffect, useState } from "react";
+import { Boxes } from "@/components/ui/background-boxes";
+import { LampContainer } from "@/components/lamp";
 
 export default function Ecosystem() {
   const [startups, setStartups] = useState<string[][]>([]);
@@ -75,15 +77,21 @@ export default function Ecosystem() {
   );
 
   return (
-    <div className="min-h-screen p-8 bg-slate-900">
-      <h1 className="text-4xl font-bold mb-12 text-cyan-400 text-center">
-        NYC Tech Ecosystem
-      </h1>
-      <div className="max-w-7xl mx-auto">
-        <Section title="Startups" data={startups} />
-        <Section title="Venture Capital" data={vcs} />
-        <Section title="Accelerators & Incubators" data={accelerators} />
+    <LampContainer>
+      <div className="min-h-screen p-8 bg-slate-900 relative">
+        <Boxes className="absolute inset-0 z-0" />
+
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold mb-12 text-cyan-400 text-center">
+            NYC Tech Ecosystem
+          </h1>
+          <div className="max-w-7xl mx-auto">
+            <Section title="Startups" data={startups} />
+            <Section title="Venture Capital" data={vcs} />
+            <Section title="Accelerators & Incubators" data={accelerators} />
+          </div>
+        </div>
       </div>
-    </div>
+    </LampContainer>
   );
 }

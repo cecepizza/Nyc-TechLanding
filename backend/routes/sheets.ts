@@ -60,11 +60,10 @@ router.get("/jobs", async (req: Request, res: Response) => {
 
 // startups route
 router.get("/startups", async (req: Request, res: Response) => {
-  const sheetId = (req.query.id as string) || process.env.STARTUPS_SHEET_ID;
   console.log("Recieved request on /api/sheets/startups");
   try {
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: sheetId,
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "startups!A1:Z100",
     });
     res.json({ data: response.data.values });
