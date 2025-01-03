@@ -2,18 +2,9 @@
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 import { Illustration } from "@/components/illustration";
-import { FloatingDock } from "@/components/ui/floating-dock";
-import {
-  IconBriefcase,
-  IconCalendarEvent,
-  IconNetwork,
-} from "@tabler/icons-react";
-import { MarqueeDemo } from "@/components/magicui/marqueeInfo";
-import { Boxes } from "@/components/ui/background-boxes";
-import { CalendarComponent } from "@/components/calendar/Calendar";
 
 const GlowingStarsBackgroundCard = ({
   className,
@@ -48,47 +39,13 @@ const GlowingStarsBackgroundCard = ({
 };
 
 export default function Home() {
-  const dockItems = [
-    {
-      title: "Jobs",
-      icon: <IconBriefcase />,
-      href: "/jobs",
-    },
-    {
-      title: "Events",
-      icon: <IconCalendarEvent />,
-      href: "/events",
-    },
-    {
-      title: "Network",
-      icon: <IconNetwork />,
-      href: "/ecosystem",
-    },
-  ];
-
-  const events = [
-    {
-      title: "Event 1",
-      start: new Date(),
-      end: new Date(),
-    },
-  ];
-
   return (
     <div className="min-h-screen p-4 md:p-8">
       <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center z-10">
         tech hub
       </h1>
       <GlowingStarsBackgroundCard>
-        <div className="flex flex-col gap-8 max-w-7xl mx-auto z-10">
-          <div className="flex justify-center">
-            <FloatingDock
-              items={dockItems}
-              desktopClassName="relative"
-              mobileClassName="relative"
-            />
-          </div>
-        </div>
+        <div className="flex flex-col gap-8 max-w-7xl mx-auto z-10"></div>
       </GlowingStarsBackgroundCard>
     </div>
   );
