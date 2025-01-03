@@ -14,6 +14,35 @@
   box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
   border-radius: 24px;
   overflow: hidden;
+  .fc {
+    --fc-border-color: rgba(255, 255, 255, 0.1);
+    --fc-today-bg-color: rgba(14, 165, 233, 0.1);
+    --fc-neutral-bg-color: transparent;
+    --fc-list-event-hover-bg-color: rgba(14, 165, 233, 0.2);
+    --fc-page-bg-color: transparent;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .fc-event {
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, #14b8a6, #3b82f6);
+    border-radius: 8px;
+    padding: 2px 6px;
+    color: white;
+    font-size: 0.85rem;
+    transition: all 0.8s ease;
+  }
+  
+  .fc-event:hover {
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    transform: scale(1.05);
+  }
 }
 
 /* Terminal-inspired header */

@@ -201,10 +201,11 @@ button:active {
   text-align: left;
   background: linear-gradient(
     to right,
-    var(--accent-color),
-    var(--secondary-color)
+    var(--primary-accent),
+    var(--secondary-accent)
   );
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   margin-bottom: 16px;
 }
