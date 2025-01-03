@@ -3,18 +3,51 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --accent-color: #14b8a6; /* Cyan accent for links and highlights */
-  --secondary-color: #6366f1; /* Purple for gradients and headers */
+  --background-color: #0a0a0a;
+  --foreground-color: #ffffff;
+  --primary-accent: #14b8a6;
+  --secondary-accent: #6366f1;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-hover-shadow: rgba(0, 255, 255, 0.4);
+  --section-border: rgba(255, 255, 255, 0.3);
+  --section-bg: rgba(10, 10, 10, 0.5);
 }
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: var(--background);
-  color: var(--foreground);
-  padding-top: 60px;
-  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  padding-top: 50px;
+  line-height: 1;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  background: linear-gradient(to right, var(--secondary-color), #1e40af);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 800;
+  transition: color 0.3s ease;
+}
+
+.nav-item.active a {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.nav-item a:hover {
+  color: var(--accent-color);
 }
 
 /* Buttons */
@@ -114,8 +147,15 @@ button:active {
   background-size: 100px 100px, 50px 50px;
   background-position: 0 0, 25px 25px;
   animation: stars 10s linear infinite;
-  z-index: 0;
-  opacity: 0.7; /* Reduce brightness slightly */
+}
+
+@keyframes stars {
+  from {
+    background-position: 0 0, 25px 25px;
+  }
+  to {
+    background-position: 50px 50px, 75px 75px;
+  }
 }
 
 @keyframes stars {
@@ -129,9 +169,9 @@ button:active {
 
 /* Cards */
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -139,21 +179,32 @@ button:active {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px var(--card-hover-shadow);
+}
+
+.section-wrapper {
+  border: 1px solid var(--section-border);
+  background: var(--section-bg);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.section-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Section Headers */
 .section-header {
   font-size: 2rem;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   background: linear-gradient(
     to right,
     var(--accent-color),
     var(--secondary-color)
   );
   -webkit-background-clip: text;
-  background-clip: text;
   color: transparent;
   margin-bottom: 16px;
 }

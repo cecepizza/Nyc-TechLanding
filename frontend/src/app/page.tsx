@@ -81,16 +81,22 @@ const CompactGridSection = ({
   link: string;
   data: any[];
 }) => (
-  <div className="mb-16 relative z-10 px-4 md:px-8">
+  <div className="relative z-10 px-4 md:px-8">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-b from-black/80 to-slate-800 p-6 rounded-lg shadow-lg"
+      className="p-6 rounded-lg shadow-lg"
+      style={{
+        border: "1px solid rgba(255, 255, 255, 0.3)", // Border for the section
+        background: "rgba(10, 10, 10, 0.5)", // 50% opacity background
+      }}
     >
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-4">
-        {title}
-      </h2>
-      <p className="text-slate-300 mb-6">{description}</p>
+      <div className="text-left mb-6">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
+          {title}
+        </h2>
+        <p className="text-slate-300">{description}</p>
+      </div>
 
       {/* Compact Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -113,12 +119,15 @@ const CompactGridSection = ({
 
 const CompactPreviewCard = ({ data }: { data: any }) => (
   <motion.div
-    whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(0,255,255,0.4)" }}
-    className="flex items-center gap-4 bg-slate-800 border border-cyan-500 rounded-md p-4 shadow-md transition-all"
+    whileHover={{
+      scale: 1.05,
+      boxShadow: "0px 0px 15px var(--card-hover-shadow)",
+    }}
+    className="card flex items-center gap-4 transition-transform"
   >
     {/* Thumbnail */}
     <div
-      className="w-12 h-12 bg-cover bg-center rounded"
+      className="w-16 h-16 bg-cover bg-center rounded-md"
       style={{
         backgroundImage: `url(${data[6] || "/previews/default.jpg"})`,
       }}

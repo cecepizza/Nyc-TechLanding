@@ -159,6 +159,8 @@
   font-size: 1.75rem;
   font-weight: 600;
   background: linear-gradient(to right, #0ea5e9, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -240,18 +242,3 @@
 }
 
 /* Repeat for other color combinations */
-
-.section-header {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  background: linear-gradient(
-    to right,
-    var(--accent-color),
-    var(--secondary-color)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 16px;
-}
