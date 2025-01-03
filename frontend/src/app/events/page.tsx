@@ -70,8 +70,7 @@ export default function Events() {
   return (
     <LampContainer>
       <div className="relative bg-slate-800 min-h-screen p-2">
-        <Boxes className="absolute inset-2 z-0" />
-
+        <Boxes className="absolute inset-0 z-0 bg-slate-900 opacity-80" />
         <div className="relative z-10 max-w-6xl mx-auto space-y-8">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -143,6 +142,7 @@ export default function Events() {
     </LampContainer>
   );
 }
+
 const EventCard = ({ event }: { event: Event }) => (
   <Card
     className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg 
@@ -164,8 +164,6 @@ const EventCard = ({ event }: { event: Event }) => (
 
     {/* Content Section */}
     <div className="p-4 flex flex-col h-[240px]">
-      {" "}
-      {/* Fixed height for content */}
       <CardHeader className="p-0 mb-3">
         <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2">
           {event.name}
@@ -173,8 +171,6 @@ const EventCard = ({ event }: { event: Event }) => (
       </CardHeader>
       <CardContent className="p-0 flex flex-col h-full">
         <div className="space-y-2 mb-auto">
-          {" "}
-          {/* Push content up */}
           <InfoRow
             icon={<Calendar className="w-4 h-4 text-cyan-400" />}
             text={event.date}
@@ -199,7 +195,6 @@ const EventCard = ({ event }: { event: Event }) => (
           />
         </div>
 
-        {/* Button always at bottom */}
         {event.url && (
           <div className="pt-2 relative">
             <a

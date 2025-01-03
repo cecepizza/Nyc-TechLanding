@@ -5,6 +5,8 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
+  --accent-color: #14b8a6; /* Cyan accent for links and highlights */
+  --secondary-color: #6366f1; /* Purple for gradients and headers */
 }
 
 body {
@@ -12,36 +14,47 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   padding-top: 60px;
-}
-.navbar {
-  display: flex;
-  gap: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
+  line-height: 1.6;
 }
 
-.nav-item a {
-  text-decoration: none;
-  color: #333;
-}
-
-.nav-item.active a {
-  font-weight: bold;
-  color: #0070f3;
-}
-
+/* Buttons */
 button {
-  background: none;
+  background: var(--accent-color);
+  color: white;
   border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
   cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
+
+button:hover {
+  background: #0d9488; /* Darker cyan */
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Terminal Window */
 .terminal-window {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
 }
 
 .terminal-bubble {
   transition: all 0.2s ease;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
 }
 
 .terminal-bubble:hover {
@@ -51,22 +64,103 @@ button {
 
 .terminal-icon {
   filter: opacity(0.8);
+  transition: opacity 0.3s ease;
 }
 
+.terminal-icon:hover {
+  filter: opacity(1);
+}
+
+/* Calendar */
 .calendar-container .fc {
   --fc-border-color: rgba(255, 255, 255, 0.1);
   --fc-today-bg-color: rgba(14, 165, 233, 0.1);
   --fc-neutral-bg-color: transparent;
-  --fc-list-event-hover-bg-color: rgba(14, 165, 233, 0.1);
+  --fc-list-event-hover-bg-color: rgba(14, 165, 233, 0.2);
   --fc-page-bg-color: transparent;
+  padding: 16px;
+  border-radius: 10px;
 }
 
 .calendar-container .fc-event {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(14, 165, 233, 0.2);
+  background: rgba(14, 165, 233, 0.3);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.calendar-container .fc-event:hover {
+  background: var(--accent-color);
+  color: black;
 }
 
 .calendar-container .fc-toolbar-title {
-  color: #f5f0e8;
+  color: var(--foreground);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Glowing Stars Effect */
+.bg-stars {
+  background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 2px
+    ),
+    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 50px 50px;
+  background-position: 0 0, 25px 25px;
+  animation: stars 10s linear infinite;
+  z-index: 0;
+  opacity: 0.7; /* Reduce brightness slightly */
+}
+
+@keyframes stars {
+  from {
+    background-position: 0 0, 25px 25px;
+  }
+  to {
+    background-position: 50px 50px, 75px 75px;
+  }
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Headers */
+.section-header {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    var(--accent-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+  font-size: 1rem;
 }
