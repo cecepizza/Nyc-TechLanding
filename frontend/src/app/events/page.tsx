@@ -69,14 +69,14 @@ export default function Events() {
 
   return (
     <LampContainer>
-      <div className="relative bg-slate-800 min-h-screen p-2">
-        <Boxes className="absolute inset-0 z-0 bg-slate-900 opacity-80" />
-        <div className="relative z-10 max-w-6xl mx-auto space-y-8">
+      <div className="relative min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white overflow-hidden">
+        <Boxes className="absolute inset-0 z-0 bg-opacity-70" />
+        <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-4 md:p-8">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
-            className="text-4xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text transition-transform duration-300"
+            className="text-5xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text transition-transform duration-300"
           >
             Tech Events Hub
           </motion.h1>
@@ -100,6 +100,7 @@ export default function Events() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
+                className="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 rounded-lg shadow-lg p-6"
               >
                 <CalendarComponent onEventClick={handleCalendarEventClick} />
               </motion.div>

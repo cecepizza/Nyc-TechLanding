@@ -123,6 +123,13 @@ export const CalendarComponent: React.FC<CalendarProps> = ({
               }}
               displayEventTime={false}
               displayEventEnd={false}
+              dayCellClassNames={(dateInfo) => {
+                const today = new Date();
+                if (dateInfo.date < today) {
+                  return ["bg-gray-200"];
+                }
+                return [];
+              }}
             />
           </div>
         </Card>
