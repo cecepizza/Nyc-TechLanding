@@ -11,8 +11,31 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: var(--background);
   color: var(--foreground);
+  padding-top: 60px;
+}
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
 }
 
+.nav-item a {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-item.active a {
+  font-weight: bold;
+  color: #0070f3;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .terminal-window {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
@@ -45,5 +68,5 @@ body {
 }
 
 .calendar-container .fc-toolbar-title {
-  color: #F5F0E8;
+  color: #f5f0e8;
 }
