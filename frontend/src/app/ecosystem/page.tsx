@@ -2,7 +2,7 @@
 import { config } from "@/config";
 import React, { useEffect, useState } from "react";
 import { Boxes } from "@/components/ui/background-boxes";
-import { LampContainer } from "@/components/lamp";
+// import { LampContainer } from "@/components/lamp";
 import { motion } from "framer-motion";
 
 export default function Ecosystem() {
@@ -89,23 +89,23 @@ export default function Ecosystem() {
   );
 
   return (
-    <LampContainer>
-      <div className="relative min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white overflow-hidden">
-        <Boxes className="absolute inset-0 z-0 bg-opacity-50" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-5xl font-bold text-center bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-12"
-          >
-            NYC Tech Ecosystem
-          </motion.h1>
-          <Section title="Startups" data={startups} />
-          <Section title="Venture Capitalists" data={vcs} />
-          <Section title="Accelerators & Incubators" data={accelerators} />
-        </div>
+    // <LampContainer>
+    <div className="relative min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white overflow-hidden">
+      <Boxes className="absolute inset-0 z-0 bg-opacity-50" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-5xl font-bold text-center bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-12"
+        >
+          NYC Tech Ecosystem
+        </motion.h1>
+        <Section title="Startups" data={startups} />
+        <Section title="Venture Capitalists" data={vcs} />
+        <Section title="Accelerators & Incubators" data={accelerators} />
       </div>
-    </LampContainer>
+    </div>
+    // </LampContainer>
   );
 }

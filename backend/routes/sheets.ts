@@ -113,6 +113,12 @@ router.post("/events/update", async (req: Request, res: Response) => {
     );
     const eventsData = JSON.parse(fs.readFileSync(scrapedEventsPath, "utf-8"));
 
+    // Clear the first row of the Google Sheet
+    await sheets.spreadsheets.values.clear({
+      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+      range: "events!A1:I1",
+    });
+
     // Format the events for Google Sheets
     const values = eventsData.map((event: any) => [
       event.name,
@@ -126,13 +132,13 @@ router.post("/events/update", async (req: Request, res: Response) => {
       event.last_updated,
     ]);
 
-    // Clear existing content
+    // Clear existing content from A2 onwards
     await sheets.spreadsheets.values.clear({
       spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "events!A2:I100",
     });
 
-    // Update with new values
+    // Update with new values starting from A2
     await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.GOOGLE_SHEETS_ID,
       range: "events!A2",

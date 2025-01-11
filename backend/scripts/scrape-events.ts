@@ -16,7 +16,7 @@ function cleanDate(dateStr: string): string {
     .trim();
 }
 
-export async function scrapeEvents() {
+export async function scrapeEvents(): Promise<any[]> {
   console.log("Starting scrape");
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -119,8 +119,11 @@ export async function scrapeEvents() {
       JSON.stringify(cleanedEvents, null, 2)
     );
     console.log("\nEvents saved to scraped-events.json");
+
+    return cleanedEvents;
   } catch (error) {
     console.error("Error scraping events:", error);
+    return [];
   } finally {
     await browser.close();
   }
