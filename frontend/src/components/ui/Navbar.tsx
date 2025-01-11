@@ -36,4 +36,6 @@ const NavBar = memo(
   )
 );
 
+NavBar.displayName = "NavBar"; // set explicit name to help React DevTools identify the component
+
 export default NavBar;

@@ -3,13 +3,14 @@
 export interface Event {
   name: string;
   date: string;
-  time: string;
-  organizer: string;
+  time?: string;
+  duration?: string;
   location: string;
+  organizer: string;
   url: string | null;
   cover_image_url: string | null;
   event_type: string;
-  last_updated: string;
+  last_updated?: string;
 }
 
 export interface CalendarEvent {
@@ -23,4 +24,5 @@ export interface CalendarEvent {
     coverImage: string | null;
     eventType: string;
   };
+  onEventClick: (event: Event) => void;
 }

@@ -15,25 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Navigation config
-const navLinks = [
-  { label: "Home", path: "/", key: "Home" },
-  { label: "About", path: "/about", key: "About" },
-  { label: "Contact", path: "/contact", key: "Contact" },
-  { label: "Jobs", path: "/jobs", key: "Jobs" },
-  { label: "Events", path: "/events", key: "Events" },
-  { label: "Ecosystem", path: "/ecosystem", key: "Ecosystem" },
-];
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [activeItem, setActiveItem] = React.useState<string | null>(null);
-  const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(
-    null
-  );
 
   const handleNavigation = (item: string) => setActiveItem(item);
 
