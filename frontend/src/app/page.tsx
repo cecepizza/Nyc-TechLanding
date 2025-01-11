@@ -4,9 +4,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
 // import { Boxes } from "@/components/ui/background-boxes";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
@@ -35,26 +32,6 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black to-slate-900 text-white overflow-hidden">
-      {/* Icons in Top Right Corner */}
-      <div className="absolute top-4 p-4 right-4 z-20 flex space-x-4">
-        <a
-          href="https://x.com/fractaltechnyc"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-cyan-500 hover:text-cyan-600 transition-all"
-        >
-          <FontAwesomeIcon icon={faTwitter} size="2x" />
-        </a>
-        <a
-          href="https://linktr.ee/nyctech"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-cyan-500 hover:text-cyan-600 transition-all"
-        >
-          <FontAwesomeIcon icon={faCode} size="2x" />
-        </a>
-      </div>
-
       {/* Glowing Stars Background */}
       <div className="absolute inset-0 z-0">
         {/* <Boxes /> */}
@@ -113,30 +90,30 @@ const CompactGridSection = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 rounded-lg shadow-lg"
+      className="p-4 md:p-6 rounded-lg shadow-lg"
       style={{
-        border: "1px solid rgba(255, 255, 255, 0.3)", // Border for the section
-        background: "rgba(10, 10, 10, 0.5)", // 50% opacity background
+        border: "1px solid rgba(255, 255, 255, 0.3)",
+        background: "rgba(10, 10, 10, 0.5)",
       }}
     >
-      <div className="text-left mb-6">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
+      <div className="text-left mb-4 md:mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
           {title}
         </h2>
-        <p className="text-slate-300">{description}</p>
+        <p className="text-slate-300 text-sm md:text-base">{description}</p>
       </div>
 
       {/* Compact Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {data.map((item, index) => (
           <CompactPreviewCard key={index} data={item} section={section} />
         ))}
       </div>
 
-      <div className="text-center mt-6">
+      <div className="text-center mt-4 md:mt-6">
         <a
           href={link}
-          className="inline-block px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md font-medium text-sm transition-all"
+          className="inline-block px-3 py-2 md:px-4 md:py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md font-medium text-sm transition-all"
         >
           View All →
         </a>
@@ -157,11 +134,11 @@ const CompactPreviewCard = ({
       scale: 1.01,
       boxShadow: "0px 0px 15px var(--card-hover-shadow)",
     }}
-    className="card flex items-center gap-4 transition-transform"
+    className="card flex items-center gap-2 md:gap-4 transition-transform"
   >
     {/* Thumbnail */}
     <div
-      className="w-16 h-16 bg-cover bg-center rounded-md"
+      className="w-12 h-12 md:w-16 md:h-16 bg-cover bg-center rounded-md"
       style={{
         backgroundImage: `url(${
           section === "events" ? data[6] : data[7] || "/previews/default.jpg"
@@ -171,13 +148,10 @@ const CompactPreviewCard = ({
 
     {/* Content */}
     <div className="flex-1">
-      <h3 className="text-cyan-300 font-bold text-sm truncate">{data[0]}</h3>
+      <h3 className="text-cyan-300 font-bold text-xs md:text-sm truncate">
+        {data[0]}
+      </h3>
       <p className="text-slate-400 text-xs truncate">{data[1]}</p>
-      {/* {data[2] && (
-        // <p className="text-cyan-400 text-xs mt-1">
-        //   <strong>Date:</strong> {data[2]}
-        // </p>
-      )} */}
     </div>
   </motion.div>
 );

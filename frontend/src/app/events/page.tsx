@@ -139,7 +139,7 @@ const EventCard = ({ event }: { event: Event }) => (
                    shadow-xl hover:shadow-2xl transition-all duration-300 
                    w-[300px] h-[400px]"
   >
-    {/* Image Section */}
+    Image Section
     <div className="h-[160px] flex-shrink-0">
       {event.cover_image_url ? (
         <img
@@ -151,7 +151,6 @@ const EventCard = ({ event }: { event: Event }) => (
         <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-700 rounded-t-lg" />
       )}
     </div>
-
     {/* Content Section */}
     <div className="p-4 flex flex-col h-[240px]">
       <CardHeader className="p-0 mb-3">
