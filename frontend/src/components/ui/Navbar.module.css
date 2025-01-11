@@ -1,23 +1,29 @@
 .navbar {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   background: linear-gradient(90deg, #4a90e2, #007aff, #14b8a6, #6366f1);
-  padding: 10px 20px;
+  padding: 12px 20px; /* Consistent padding */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
   font-family: "Roboto", Arial, sans-serif;
-  backdrop-filter: blur(8px); /* Add subtle blur effect */
+  display: flex;
+  justify-content: center; /* Ensures content is centered */
+  align-items: center; /* Vertical alignment */
+  backdrop-filter: blur(8px); /* Subtle blur for aesthetics */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navList {
   list-style: none;
   display: flex;
   justify-content: space-around;
+  align-items: center; /* Ensure vertical alignment of items */
   margin: 0;
   padding: 0;
-  align-items: center;
+  width: 100%; /* Allow the nav items to span the width */
+  max-width: 1200px; /* Optional: to keep content centered on large screens */
 }
 
 .navItem {
@@ -31,7 +37,7 @@
 .navItem a {
   text-decoration: none;
   color: inherit;
-  padding: 10px 15px;
+  padding: 10px 15px; /* Adjust spacing for a balanced look */
   display: block;
   transition: all 0.3s ease;
 }
@@ -76,7 +82,7 @@
 
   .navList {
     flex-direction: column;
-    gap: 10px;
+    gap: 10px; /* Consistent gap for stacked items */
   }
 
   .navItem {

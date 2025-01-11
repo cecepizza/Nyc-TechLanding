@@ -4,8 +4,11 @@ import fetch from "node-fetch";
 async function scrapeAndUpdateEvents() {
   try {
     // First scrape the events
-    await scrapeEvents();
+    const events = await scrapeEvents();
     console.log("Events scraped successfully");
+
+    // Filter out the first row
+    const filteredEvents = events.slice(1);
 
     // Then update Google Sheets via the API endpoint
     const response = await fetch(
@@ -15,6 +18,7 @@ async function scrapeAndUpdateEvents() {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(filteredEvents), // Send filtered events
       }
     );
 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
-import { Boxes } from "@/components/ui/background-boxes";
+// import { Boxes } from "@/components/ui/background-boxes";
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<any[]>([]);
@@ -11,21 +11,21 @@ const Home = () => {
   const [ecosystemPreview, setEcosystemPreview] = useState<any[]>([]);
 
   useEffect(() => {
-    async function fetchPreviews() {
+    const fetchPreviews = async () => {
       try {
         const [eventsRes, jobsRes, ecosystemRes] = await Promise.all([
-          fetch(config.backendUrl + "/api/sheets/events?limit=6"),
-          fetch(config.backendUrl + "/api/sheets/jobs?limit=6"),
-          fetch(config.backendUrl + "/api/sheets/startups?limit=6"),
+          fetch(`${config.backendUrl}/api/sheets/events?limit=6`),
+          fetch(`${config.backendUrl}/api/sheets/jobs?limit=6`),
+          fetch(`${config.backendUrl}/api/sheets/startups?limit=6`),
         ]);
 
-        setEventsPreview((await eventsRes.json()).data || []);
+        setEventsPreview((await eventsRes.json()).data.slice(1) || []);
         setJobsPreview((await jobsRes.json()).data || []);
         setEcosystemPreview((await ecosystemRes.json()).data || []);
       } catch (error) {
         console.error("Error fetching preview data:", error);
       }
-    }
+    };
 
     fetchPreviews();
   }, []);
@@ -34,7 +34,7 @@ const Home = () => {
     <div className="relative min-h-screen bg-gradient-to-br from-black to-slate-900 text-white overflow-hidden">
       {/* Glowing Stars Background */}
       <div className="absolute inset-0 z-0">
-        <Boxes />
+        {/* <Boxes /> */}
         <div className="absolute inset-0 bg-stars z-0"></div>
       </div>
 
