@@ -7,10 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useEvents } from "./hooks/useEvents";
 import ShineBorder from "@/components/ui/shine-border";
 import "./Calendar.css";
-
-interface CalendarProps {
-  onEventClick: (event: any) => void;
-}
+import { Event } from "./types";
 
 function getRandomColor() {
   const colors = [
@@ -23,14 +20,18 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-export const CalendarComponent: React.FC<CalendarProps> = ({
+interface CalendarComponentProps {
+  onEventClick: (event: Event) => void;
+}
+
+export const CalendarComponent: React.FC<CalendarComponentProps> = ({
   onEventClick,
 }) => {
   const { events, loading } = useEvents();
-  const [selectedEvent, setSelectedEvent] = React.useState<any>(null);
+  const [_selectedEvent, setSelectedEvent] = React.useState<Event | null>(null);
 
-  const handleEventClick = (clickInfo: any) => {
-    const event = {
+  const handleEventClick = (clickInfo: { event: any }) => {
+    const event: Event = {
       name: clickInfo.event.title,
       date: clickInfo.event.start.toLocaleDateString(),
       time: clickInfo.event.start.toLocaleTimeString(),

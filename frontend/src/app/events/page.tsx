@@ -12,18 +12,7 @@ import "@/components/calendar/Calendar.css";
 import { motion } from "framer-motion";
 import { config } from "@/config";
 import { LampContainer } from "@/components/lamp";
-
-interface Event {
-  name: string;
-  date: string;
-  duration: string;
-  location: string;
-  organizer: string;
-  url: string | null;
-  cover_image_url: string | null;
-  event_type: string;
-  last_updated: string;
-}
+import { Event } from "@/components/calendar/types";
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -78,7 +67,7 @@ export default function Events() {
             whileHover={{ scale: 1.05 }}
             className="text-5xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text transition-transform duration-300"
           >
-            Tech Events Hub
+            Tech Events
           </motion.h1>
 
           {loading ? (

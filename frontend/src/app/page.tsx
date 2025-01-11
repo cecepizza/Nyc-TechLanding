@@ -4,11 +4,14 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
 // import { Boxes } from "@/components/ui/background-boxes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const [eventsPreview, setEventsPreview] = useState<any[]>([]);
-  const [jobsPreview, setJobsPreview] = useState<any[]>([]);
-  const [ecosystemPreview, setEcosystemPreview] = useState<any[]>([]);
+  const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
+  const [jobsPreview, setJobsPreview] = useState<string[][]>([]);
+  const [ecosystemPreview, setEcosystemPreview] = useState<string[][]>([]);
 
   useEffect(() => {
     const fetchPreviews = async () => {
@@ -32,6 +35,26 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black to-slate-900 text-white overflow-hidden">
+      {/* Icons in Top Right Corner */}
+      <div className="absolute top-4 p-4 right-4 z-20 flex space-x-4">
+        <a
+          href="https://x.com/fractaltechnyc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-500 hover:text-cyan-600 transition-all"
+        >
+          <FontAwesomeIcon icon={faTwitter} size="2x" />
+        </a>
+        <a
+          href="https://linktr.ee/nyctech"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-500 hover:text-cyan-600 transition-all"
+        >
+          <FontAwesomeIcon icon={faCode} size="2x" />
+        </a>
+      </div>
+
       {/* Glowing Stars Background */}
       <div className="absolute inset-0 z-0">
         {/* <Boxes /> */}
@@ -44,7 +67,7 @@ const Home = () => {
         animate={{ opacity: 1, y: 0 }}
         className="relative text-5xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mt-12 mb-12 z-10"
       >
-        Welcome to NYC Tech Hub
+        NYC Tech Hub
       </motion.h1>
 
       {/* Sections */}
@@ -79,7 +102,7 @@ const CompactGridSection = ({
   title: string;
   description: string;
   link: string;
-  data: any[];
+  data: string[][];
 }) => (
   <div className="relative z-10 px-4 md:px-8">
     <motion.div
@@ -117,7 +140,7 @@ const CompactGridSection = ({
   </div>
 );
 
-const CompactPreviewCard = ({ data }: { data: any }) => (
+const CompactPreviewCard = ({ data }: { data: string[] }) => (
   <motion.div
     whileHover={{
       scale: 1.05,
