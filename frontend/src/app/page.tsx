@@ -23,7 +23,7 @@ const Home = () => {
         ]);
 
         setEventsPreview((await eventsRes.json()).data.slice(1) || []);
-        setJobsPreview((await jobsRes.json()).data || []);
+        setJobsPreview((await jobsRes.json()).data.slice(1) || []);
         setEcosystemPreview((await ecosystemRes.json()).data || []);
       } catch (error) {
         console.error("Error fetching preview data:", error);
@@ -76,18 +76,21 @@ const Home = () => {
         description="Discover the latest tech events happening in NYC."
         link="/events"
         data={eventsPreview}
+        section="events"
       />
       <CompactGridSection
         title="Featured Jobs"
         description="Explore exciting job opportunities in the tech industry."
         link="/jobs"
         data={jobsPreview}
+        section="jobs"
       />
       <CompactGridSection
         title="NYC Tech Ecosystem"
         description="Learn about startups, VCs, and accelerators in NYC."
         link="/ecosystem"
         data={ecosystemPreview}
+        section="ecosystem"
       />
     </div>
   );
@@ -98,11 +101,13 @@ const CompactGridSection = ({
   description,
   link,
   data,
+  section,
 }: {
   title: string;
   description: string;
   link: string;
   data: string[][];
+  section: string;
 }) => (
   <div className="relative z-10 px-4 md:px-8">
     <motion.div
@@ -124,7 +129,7 @@ const CompactGridSection = ({
       {/* Compact Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item, index) => (
-          <CompactPreviewCard key={index} data={item} />
+          <CompactPreviewCard key={index} data={item} section={section} />
         ))}
       </div>
 
@@ -140,10 +145,16 @@ const CompactGridSection = ({
   </div>
 );
 
-const CompactPreviewCard = ({ data }: { data: string[] }) => (
+const CompactPreviewCard = ({
+  data,
+  section,
+}: {
+  data: string[];
+  section: string;
+}) => (
   <motion.div
     whileHover={{
-      scale: 1.05,
+      scale: 1.01,
       boxShadow: "0px 0px 15px var(--card-hover-shadow)",
     }}
     className="card flex items-center gap-4 transition-transform"
@@ -152,7 +163,9 @@ const CompactPreviewCard = ({ data }: { data: string[] }) => (
     <div
       className="w-16 h-16 bg-cover bg-center rounded-md"
       style={{
-        backgroundImage: `url(${data[6] || "/previews/default.jpg"})`,
+        backgroundImage: `url(${
+          section === "events" ? data[6] : data[7] || "/previews/default.jpg"
+        })`,
       }}
     ></div>
 
@@ -160,11 +173,11 @@ const CompactPreviewCard = ({ data }: { data: string[] }) => (
     <div className="flex-1">
       <h3 className="text-cyan-300 font-bold text-sm truncate">{data[0]}</h3>
       <p className="text-slate-400 text-xs truncate">{data[1]}</p>
-      {data[2] && (
-        <p className="text-cyan-400 text-xs mt-1">
-          <strong>Date:</strong> {data[2]}
-        </p>
-      )}
+      {/* {data[2] && (
+        // <p className="text-cyan-400 text-xs mt-1">
+        //   <strong>Date:</strong> {data[2]}
+        // </p>
+      )} */}
     </div>
   </motion.div>
 );
