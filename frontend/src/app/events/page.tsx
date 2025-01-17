@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CalendarComponent } from "@/components/calendar/Calendar";
-import { SlidingCard } from "@/components/ui/sliding-card";
+import { SlidingCard } from "@/components/ui/EventPopupCard";
 import { Boxes } from "@/components/ui/background-boxes";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import Marquee from "@/components/ui/marquee";
 import "@/components/calendar/Calendar.css";
 import { motion } from "framer-motion";
 import { config } from "@/config";
-import { LampContainer } from "@/components/lamp";
+import { LampContainer } from "@/components/ui/lamp";
 import { Event } from "@/components/calendar/types";
 
 export default function Events() {
@@ -139,7 +139,7 @@ const EventCard = ({ event }: { event: Event }) => (
                    shadow-xl hover:shadow-2xl transition-all duration-300 
                    w-[300px] h-[400px]"
   >
-    Image Section
+    {/* Image Section */}
     <div className="h-[160px] flex-shrink-0">
       {event.cover_image_url ? (
         <img

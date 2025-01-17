@@ -1,14 +1,14 @@
 [
   {
-    "name": "LFC.DEV - Hackathon v1 w/ Banc of Cal @ Fractal Tech",
+    "name": "LFC.DEV - Hackathon w/ Banc of California & Bloomberg Beta @ Fractal Tech",
     "url": "https://lu.ma/olts6pug",
     "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/iz/715dd128-cc88-40e7-bf7d-6fb8f7242007",
-    "date": "Jan 18",
+    "date": "Tomorrow",
     "time": "9:30 AM",
     "location": "Fractal Tech",
-    "organizer": "By Boris Berenberg, John Bryson & Jake Zegil",
+    "organizer": "By Boris Berenberg, John Bryson, Jake Zegil & Lori Berenberg",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.332Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
   },
   {
     "name": "Contech Hackathon: Build Day",
@@ -19,7 +19,18 @@
     "location": "Fractal Tech",
     "organizer": "By Contech Alliance, Jake Zegil & PATRICK ASTARITA",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.333Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "FractalU Orientation",
+    "url": "https://partiful.com/e/8pZAhDPkoxTauW48W7Xb",
+    "cover_image_url": null,
+    "date": "Jan 26",
+    "time": "3:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Mandelbro",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
   },
   {
     "name": "Contech Hackathon: Topping Out",
@@ -30,7 +41,7 @@
     "location": "Fractal Tech",
     "organizer": "By Contech Alliance",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.333Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
   },
   {
     "name": "Building Africa through EdTech and AI - Join the journey",
@@ -41,7 +52,7 @@
     "location": "Fractal Tech",
     "organizer": "By Emmanuel Sibanda",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.333Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
   },
   {
     "name": "Zero-Knowledge Dive, NYC",
@@ -52,7 +63,51 @@
     "location": "Fractal Tech",
     "organizer": "By Kai Geffen",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.333Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "Twitter Speedrun",
+    "url": "https://lu.ma/zm3qlvm7",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/x1/11a76033-3f05-479f-97e3-7a140bf272ff",
+    "date": "Feb 4",
+    "time": "7:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Priya Rose 🌹",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "Insight Cascade 2: using LLMs to be more human",
+    "url": "https://partiful.com/e/aG7kFQyK9w9vALNUNu5z",
+    "cover_image_url": null,
+    "date": "Feb 6",
+    "time": "6:30 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Andrew Blevins and Jason Ganz",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "Twitter Speedrun",
+    "url": "https://lu.ma/b1kh91f1",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/x1/11a76033-3f05-479f-97e3-7a140bf272ff",
+    "date": "Feb 11",
+    "time": "7:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Priya Rose 🌹",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "Twitter Speedrun",
+    "url": "https://lu.ma/focjffwu",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/x1/11a76033-3f05-479f-97e3-7a140bf272ff",
+    "date": "Feb 18",
+    "time": "7:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Priya Rose 🌹",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
   },
   {
     "name": "Generative UI/UX Hackathon",
@@ -63,6 +118,17 @@
     "location": "Fractal Tech",
     "organizer": "By Daniel Eigler-Harding & Jake Zegil",
     "event_type": "meetup",
-    "last_updated": "2025-01-11T00:59:53.333Z"
+    "last_updated": "2025-01-17T20:37:04.583Z"
+  },
+  {
+    "name": "Twitter Speedrun",
+    "url": "https://lu.ma/epzi4lk7",
+    "cover_image_url": "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=180,height=180/gallery-images/x1/11a76033-3f05-479f-97e3-7a140bf272ff",
+    "date": "Feb 25",
+    "time": "7:00 PM",
+    "location": "Fractal Tech",
+    "organizer": "By Priya Rose 🌹",
+    "event_type": "meetup",
+    "last_updated": "2025-01-17T20:37:04.583Z"
   }
 ]
