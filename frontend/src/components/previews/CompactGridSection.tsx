@@ -4,7 +4,7 @@ import EventPreviewCard from "@/components/previews/EventPreviewCard";
 import JobPreviewCard from "@/components/previews/JobPreviewCard";
 import NetworkPreviewCard from "@/components/previews/NetworkPreviewCard";
 import PreviewPopupCard from "@/components/previews/PreviewPopupCard";
-import "./CompactGridSection.css";
+import "./compactGridSection.css";
 
 const CompactGridSection = ({
   title,
