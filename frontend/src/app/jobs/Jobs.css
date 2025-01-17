@@ -1,0 +1,125 @@
+/* Page Styling */
+.jobs-page {
+    padding: 2rem;
+  }
+  
+  .jobs-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .jobs-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #38b2ac, #4299e1);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .jobs-search-input {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #38b2ac;
+    border-radius: 0.5rem;
+    background-color: #1a202c;
+    color: white;
+    width: 100%;
+    max-width: 400px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .jobs-search-input:focus {
+    border-color: #4299e1;
+  }
+  
+  /* Grid Styling */
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Job Card Styling */
+  .job-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: #1a202c;
+    border: 1px solid #38b2ac;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    color: white;
+    text-decoration: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .job-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 255, 255, 0.1);
+  }
+  
+  .job-card-icon {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .job-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .job-placeholder-icon {
+    width: 50px;
+    height: 50px;
+    background: #38b2ac;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .job-card-content {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .job-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #38b2ac;
+  }
+  
+  .job-company {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: #cbd5e0;
+  }
+  
+  .job-date {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    color: #a0aec0;
+  }
+  
+  .job-location {
+    font-size: 1rem;
+    color: #4299e1;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .jobs-title {
+      font-size: 2rem;
+    }
+  
+    .jobs-search-input {
+      font-size: 0.875rem;
+    }
+  }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import "./previewPopUp.css";
 
 interface PreviewPopupCardProps {
   isOpen: boolean;
@@ -67,14 +66,14 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
             }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed z-50 w-full max-w-md overflow-hidden rounded-lg shadow-2xl bg-gradient-to-r from-gray-800 to-gray-900 border-4 border-gray-500"
+            className="fixed z-50 w-full max-w-md overflow-visible rounded-lg shadow-2xl bg-gradient-to-r from-blue-800 to-blue-900 border-4 border-gray-500"
           >
             {/* Popup Content */}
             <div
               className="relative w-full h-[300px] bg-cover bg-center transition-transform duration-300 ease-in-out transform"
               style={{ backgroundImage: `url(${imageUrl})` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-800/60 to-transparent" />
               <div className="absolute bottom-16 left-0 p-6">
                 <h2 className="text-3xl font-extrabold text-white shadow-md">
                   {currentItem[0]}
@@ -84,7 +83,7 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
             </div>
 
             {/* Navigation Buttons Below the Image */}
-            <div className="flex justify-between fixed bottom-4 left-0 right-0 z-[60] px-4">
+            <div className="flex justify-between fixed bottom-0 left-0 right-0 z-[60] px-0 bg-gradient-to-r from-gray-800 to-gray-900">
               <button
                 onClick={handlePrevious}
                 className="popup-card button button-back flex items-center justify-center"
