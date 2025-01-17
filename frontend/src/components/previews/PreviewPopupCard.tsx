@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import "./previewPopUp.css";
@@ -19,6 +19,11 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
   section,
 }) => {
   const [index, setIndex] = useState(currentIndex);
+
+  // Update index when currentIndex prop changes
+  useEffect(() => {
+    setIndex(currentIndex);
+  }, [currentIndex]);
 
   const handleNext = () => {
     setIndex((prevIndex) => (prevIndex + 1) % data.length);
@@ -89,7 +94,13 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
 
               {/* Corresponding Page Button */}
               <button
-                onClick={() => (window.location.href = currentItem[2])} // Assuming currentItem[2] contains the URL
+                onClick={() => {
+                  if (section === "jobs") {
+                    window.location.href = `/jobs`; // Navigate to jobs page
+                  } else if (section === "events") {
+                    window.location.href = `/events`; // Navigate to events page
+                  }
+                }}
                 className="popup-card button button-go flex items-center justify-center"
               >
                 Go to Page

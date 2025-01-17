@@ -4,6 +4,7 @@ import EventPreviewCard from "@/components/previews/EventPreviewCard";
 import JobPreviewCard from "@/components/previews/JobPreviewCard";
 import NetworkPreviewCard from "@/components/previews/NetworkPreviewCard";
 import PreviewPopupCard from "@/components/previews/PreviewPopupCard";
+import "./CompactGridSection.css";
 
 const CompactGridSection = ({
   title,
@@ -73,7 +74,7 @@ const CompactGridSection = ({
         }}
       >
         <div className="text-left mb-4 md:mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2 overflow-hidden text-ellipsis whitespace-nowrap md:whitespace-normal">
             {title}
           </h2>
           <p className="text-slate-300 text-sm md:text-base">{description}</p>
