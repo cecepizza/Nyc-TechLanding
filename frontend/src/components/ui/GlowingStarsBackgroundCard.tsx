@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Illustration } from "@/components/illustration";
+import { Illustration } from "@/components/ui/illustration";
 
 export const GlowingStarsBackgroundCard = ({
   className,

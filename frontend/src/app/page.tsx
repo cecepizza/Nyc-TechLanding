@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
+import CompactGridSection from "@/components/previews/CompactGridSection";
 // import { Boxes } from "@/components/ui/background-boxes";
 
 const Home = () => {
@@ -72,88 +73,5 @@ const Home = () => {
     </div>
   );
 };
-
-const CompactGridSection = ({
-  title,
-  description,
-  link,
-  data,
-  section,
-}: {
-  title: string;
-  description: string;
-  link: string;
-  data: string[][];
-  section: string;
-}) => (
-  <div className="relative z-10 px-4 md:px-8">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="p-4 md:p-6 rounded-lg shadow-lg"
-      style={{
-        border: "1px solid rgba(255, 255, 255, 0.3)",
-        background: "rgba(10, 10, 10, 0.5)",
-      }}
-    >
-      <div className="text-left mb-4 md:mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
-          {title}
-        </h2>
-        <p className="text-slate-300 text-sm md:text-base">{description}</p>
-      </div>
-
-      {/* Compact Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {data.map((item, index) => (
-          <CompactPreviewCard key={index} data={item} section={section} />
-        ))}
-      </div>
-
-      <div className="text-center mt-4 md:mt-6">
-        <a
-          href={link}
-          className="inline-block px-3 py-2 md:px-4 md:py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md font-medium text-sm transition-all"
-        >
-          View All →
-        </a>
-      </div>
-    </motion.div>
-  </div>
-);
-
-const CompactPreviewCard = ({
-  data,
-  section,
-}: {
-  data: string[];
-  section: string;
-}) => (
-  <motion.div
-    whileHover={{
-      scale: 1.01,
-      boxShadow: "0px 0px 15px var(--card-hover-shadow)",
-    }}
-    className="card flex items-center gap-2 md:gap-4 transition-transform"
-  >
-    {/* Thumbnail */}
-    <div
-      className="w-12 h-12 md:w-16 md:h-16 bg-cover bg-center rounded-md"
-      style={{
-        backgroundImage: `url(${
-          section === "events" ? data[6] : data[7] || "/previews/default.jpg"
-        })`,
-      }}
-    ></div>
-
-    {/* Content */}
-    <div className="flex-1">
-      <h3 className="text-cyan-300 font-bold text-xs md:text-sm truncate">
-        {data[0]}
-      </h3>
-      <p className="text-slate-400 text-xs truncate">{data[1]}</p>
-    </div>
-  </motion.div>
-);
 
 export default Home;

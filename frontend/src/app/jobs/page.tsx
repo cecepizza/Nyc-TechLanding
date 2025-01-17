@@ -3,7 +3,7 @@ import { config } from "@/config";
 import React, { useEffect, useState } from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/ThreeDCard";
 import { Boxes } from "@/components/ui/background-boxes";
-import { LampContainer } from "@/components/lamp";
+import { LampContainer } from "@/components/ui/lamp";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import ShineBorder from "@/components/ui/shine-border";

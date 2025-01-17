@@ -3,5 +3,8 @@
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "requireConfigFile": false
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
