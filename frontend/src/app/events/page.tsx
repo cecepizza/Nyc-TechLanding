@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CalendarComponent } from "@/components/calendar/Calendar";
-import { SlidingCard } from "@/components/ui/sliding-card";
+import { SlidingCard } from "@/components/ui/EventPopupCard";
 import { Boxes } from "@/components/ui/background-boxes";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import Marquee from "@/components/ui/marquee";
