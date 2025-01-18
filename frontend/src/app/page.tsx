@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
 import CompactGridSection from "@/components/previews/CompactGridSection";
-// import { Boxes } from "@/components/ui/background-boxes";
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
@@ -32,7 +31,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-black to-slate-900 text-white overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-950 text-white overflow-hidden">
       {/* Glowing Stars Background */}
       <div className="absolute inset-0 z-0">
         {/* <Boxes /> */}
@@ -43,7 +42,7 @@ const Home = () => {
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative text-5xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mt-12 mb-12 z-10"
+        className="relative text-5xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mt-8 mb-6 z-10"
       >
         NYC Tech Hub
       </motion.h1>

@@ -56,7 +56,7 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
 
           {/* Card */}
           <motion.div
-            initial={{ y: "50%", opacity: 0 }}
+            initial={{ y: "0%", opacity: 0 }}
             animate={{
               y: "-60%",
               x: "-50%",
@@ -117,7 +117,7 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
                     window.location.href = `/events`;
                   }
                 }}
-                className="flex-grow text-center py-3 px-8 rounded-md bg-gray-800 text-white font-semibold hover:bg-gray-700 transition duration-200"
+                className="flex-grow text-center py-2 px-4 md:py-3 md:px-8 rounded-md bg-gray-800 text-white font-semibold hover:bg-gray-700 transition duration-200"
               >
                 View All
               </button>
