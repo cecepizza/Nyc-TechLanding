@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { config } from "@/config";
 import CompactGridSection from "@/components/previews/CompactGridSection";
+import EngravedTag from "@/components/ui/EngravedTag";
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
@@ -32,11 +33,8 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-950 text-white overflow-hidden">
-      {/* Glowing Stars Background */}
-      <div className="absolute inset-0 z-0">
-        {/* <Boxes /> */}
-        <div className="absolute inset-0 bg-stars z-0"></div>
-      </div>
+      {/* Engraved Tag */}
+      <EngravedTag />
 
       {/* Page Header */}
       <motion.h1
