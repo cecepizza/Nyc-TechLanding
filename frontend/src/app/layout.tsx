@@ -1,9 +1,10 @@
 "use client";
 
 import "./globals.css";
-import React from "react";
+import React, { useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
+import { Dock } from "@/components/ui/Dock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,17 +21,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [activeItem, setActiveItem] = React.useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string>("home");
 
-  const handleNavigation = (item: string) => setActiveItem(item);
+  const handleNavigate = (item: string) => {
+    setActiveItem(item);
+    // Add your navigation logic here
+  };
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar activeItem={activeItem} onNavigate={handleNavigation} />
-
+        <Dock activeItem={activeItem} onNavigate={handleNavigate} />
+        <Navbar activeItem={activeItem} onNavigate={handleNavigate} />
         <main>{children}</main>
       </body>
     </html>
