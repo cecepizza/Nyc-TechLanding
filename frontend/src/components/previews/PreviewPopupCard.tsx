@@ -24,6 +24,20 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
     setIndex(currentIndex);
   }, [currentIndex]);
 
+  // Add event listener for Escape key
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   const handleNext = () => {
     setIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
