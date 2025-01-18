@@ -2,8 +2,6 @@ import React, { useState, memo } from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const navLinks = [
   { label: "Home", path: "/", key: "Home" },
@@ -28,26 +26,6 @@ const NavBar = memo(
     return (
       <nav className={styles.navbar}>
         {/* Logo or Brand */}
-
-        {/* Icons in Top Right Corner */}
-        <div className="flex space-x-4">
-          <a
-            href="https://x.com/fractaltechnyc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-cyan-200 transition-all opacity-70 hover:opacity-100"
-          >
-            <FontAwesomeIcon icon={faTwitter} size="2x" />
-          </a>
-          <a
-            href="https://linktr.ee/nyctech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-cyan-200 transition-all opacity-70 hover:opacity-100"
-          >
-            <FontAwesomeIcon icon={faCode} size="2x" />
-          </a>
-        </div>
 
         {/* Hamburger Menu Toggle */}
         <div className={styles.navToggle} onClick={toggleMenu}>
