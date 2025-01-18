@@ -40,9 +40,9 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
   onNavigate: (item: string) => void;
 }
 
-const DEFAULT_SIZE = 40;
-const DEFAULT_MAGNIFICATION = 60;
-const DEFAULT_DISTANCE = 140;
+const DEFAULT_SIZE = 30;
+const DEFAULT_MAGNIFICATION = 35;
+const DEFAULT_DISTANCE = 100;
 
 const dockVariants = cva(
   "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex items-center justify-center gap-2 rounded-3xl border p-4 backdrop-blur-md shadow-lg"
@@ -144,6 +144,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         onMouseLeave={() => mouseX.set(Infinity)}
         style={{
           ...style,
+          opacity: 0.9,
           position: "fixed",
           padding: isDesktop ? "10px" : "5px",
           marginTop: "20px",
@@ -200,7 +201,7 @@ const DockIcon = ({
 
   const scaleSize = useSpring(sizeTransform, {
     mass: 0.5,
-    stiffness: 300,
+    stiffness: 500,
     damping: 70,
   });
 

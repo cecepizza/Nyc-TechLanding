@@ -68,3 +68,7 @@
     display: block; /* Show hamburger on mobile */
   }
 }
+
+.navItem a:hover {
+  color: #ffcc00; /* Change to your desired hover color */
+}
