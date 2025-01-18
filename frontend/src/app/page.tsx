@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { config } from "@/config";
 import CompactGridSection from "@/components/previews/CompactGridSection";
 import EngravedTag from "@/components/ui/EngravedTag";
+import { Boxes } from "@/components/ui/background-boxes";
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
@@ -33,6 +34,9 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-950 text-white overflow-hidden">
+      {/* Background Boxes */}
+      <Boxes className="absolute inset-0 transform" />
+
       {/* Engraved Tag */}
       <EngravedTag />
 

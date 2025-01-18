@@ -45,7 +45,7 @@ const DEFAULT_MAGNIFICATION = 35;
 const DEFAULT_DISTANCE = 100;
 
 const dockVariants = cva(
-  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex items-center justify-center gap-2 rounded-3xl border p-4 backdrop-blur-md shadow-lg"
+  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex items-center justify-center gap-1 rounded-lg border border-opacity-50 p-2 backdrop-blur-md shadow-lg"
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
@@ -66,6 +66,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
 
     // Track the screen size to conditionally position the Dock
     const [isDesktop, setIsDesktop] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
       const updateScreenSize = () => setIsDesktop(window.innerWidth >= 1024);
@@ -80,7 +81,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
           href: "https://linktr.ee/nyctech",
           icon: faLink,
           label: "Linktree",
-          color: "hover:text-green-400",
+          color: "hover:text-blue-600",
         },
         {
           href: "https://x.com/fractaltechnyc",
@@ -140,11 +141,17 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     return (
       <motion.div
         ref={ref}
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        onMouseMove={(e) => {
+          mouseX.set(e.pageX);
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          mouseX.set(Infinity);
+          setIsHovered(false);
+        }}
         style={{
           ...style,
-          opacity: 0.9,
+          opacity: isHovered ? 0.9 : 0.7,
           position: "fixed",
           padding: isDesktop ? "10px" : "5px",
           marginTop: "35px",
@@ -211,7 +218,7 @@ const DockIcon = ({
       ref={ref}
       style={{ width: scaleSize, height: scaleSize, padding }}
       className={cn(
-        "flex aspect-square cursor-pointer items-center justify-center rounded-full bg-gray-900 hover:bg-gray-700 transition-shadow duration-300 ease-in-out shadow-md hover:shadow-lg",
+        "flex aspect-square cursor-pointer items-center justify-center  bg-gray-900 hover:bg-gray-700 rounded-2xl transition-shadow duration-300 ease-in-out shadow-md hover:shadow-lg",
         className
       )}
       {...props}
