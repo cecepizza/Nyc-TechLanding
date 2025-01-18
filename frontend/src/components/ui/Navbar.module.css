@@ -10,7 +10,7 @@
   z-index: 1000;
   font-family: "Roboto", Arial, sans-serif;
   display: flex;
-  justify-content: space-between; /* Space between logo and hamburger */
+  justify-content: space-between; /* Keep space between brand and toggle */
   align-items: center;
   backdrop-filter: blur(8px);
   transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -22,7 +22,7 @@
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
-  padding: 6px;
+  padding: 4px;
   width: 100%;
   max-width: 1200px;
 }
@@ -71,4 +71,10 @@
 
 .navItem a:hover {
   color: #ffcc00; /* Change to your desired hover color */
+}
+
+.brand {
+  margin-right: auto; /* Pushes the brand to the left */
+  font-size: 24px; /* Adjust font size as needed */
+  color: #ffffff; /* Set brand color */
 }
