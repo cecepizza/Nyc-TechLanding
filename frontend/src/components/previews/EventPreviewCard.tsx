@@ -23,17 +23,17 @@ const EventPreviewCard: React.FC<EventPreviewCardProps> = ({
       onClick={onClick}
     >
       <div
-        className="w-12 h-12 md:w-16 md:h-16 bg-cover bg-center rounded-md"
+        className="w-12 h-12 md:w-16 md:h-16 bg-cover bg-center rounded-md flex-shrink-0"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         {/* Add a fallback text or icon if needed */}
       </div>
 
-      <div className="flex-1">
-        <h3 className="text-cyan-300 font-bold text-xs md:text-sm truncate">
+      <div className="flex-1 flex flex-col max-w-[calc(100%-4rem)]">
+        <h3 className="text-cyan-300 font-bold text-xs md:text-sm overflow-hidden text-ellipsis whitespace-nowrap">
           {data[0]} {/* Event Name */}
         </h3>
-        <p className="text-slate-400 text-xs truncate">
+        <p className="text-slate-400 text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap">
           {data[1]} {/* Event Date */}
         </p>
       </div>

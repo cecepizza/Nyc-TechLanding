@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
 interface PreviewPopupCardProps {
   isOpen: boolean;
@@ -47,9 +47,9 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.01 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
             onClick={onClose}
           />
@@ -65,8 +65,8 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
               left: "50%",
             }}
             exit={{ y: "100%", opacity: 0 }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed z-50 w-full max-w-md overflow-visible rounded-lg shadow-2xl bg-gradient-to-r from-blue-800 to-blue-900 border-4 border-gray-500"
+            transition={{ type: "spring", damping: 29, stiffness: 350 }}
+            className="fixed z-50 w-full max-w-lg overflow-hidden rounded-lg shadow-2xl bg-gradient-to-r from-blue-800 to-blue-900 border border-gray-600"
           >
             {/* Popup Content */}
             <div
@@ -74,43 +74,61 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
               style={{ backgroundImage: `url(${imageUrl})` }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-800/60 to-transparent" />
-              <div className="absolute bottom-16 left-0 p-6">
-                <h2 className="text-3xl font-extrabold text-white shadow-md">
+              <div className="absolute bottom-6 left-6 p-4">
+                <h2 className="text-2xl font-bold text-white shadow-md">
                   {currentItem[0]}
                 </h2>
-                <p className="text-lg text-gray-300">{currentItem[1]}</p>
+                <p className="text-md text-gray-300">{currentItem[1]}</p>
+                <p className="text-sm text-gray-400">{currentItem[2]}</p>
+              </div>
+              <div className="absolute top-4 right-4">
+                <button
+                  onClick={() => {
+                    if (section === "jobs") {
+                      window.open(currentItem[3], "_blank");
+                    } else if (section === "events") {
+                      window.open(currentItem[5], "_blank");
+                    }
+                  }}
+                  className="flex items-center justify-center w-12 h-12 rounded-full opacity-80 bg-blue-400 hover:bg-blue-600 text-white shadow-lg transition-all duration-200 hover:scale-110"
+                >
+                  <ExternalLink className="w-6 h-6" />
+                </button>
               </div>
             </div>
 
             {/* Navigation Buttons Below the Image */}
-            <div className="flex justify-between fixed bottom-0 left-0 right-0 z-[60] px-0 bg-gradient-to-r from-gray-800 to-gray-900">
+            <div className="flex justify-between items-center p-3 bg-gray-950 rounded-b-lg border-t border-gray-800 shadow-md">
+              {/* Previous Button */}
               <button
                 onClick={handlePrevious}
-                className="popup-card button button-back flex items-center justify-center"
+                className="flex-none items-center justify-center w-10 h-10 p-2 rounded-md bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800 transition duration-200"
+                aria-label="Previous"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                <ArrowLeft className="w-6 h-6" />
               </button>
 
-              {/* Corresponding Page Button */}
+              {/* View All Button */}
               <button
                 onClick={() => {
                   if (section === "jobs") {
-                    window.location.href = `/jobs`; // Navigate to jobs page
+                    window.location.href = `/jobs`;
                   } else if (section === "events") {
-                    window.location.href = `/events`; // Navigate to events page
+                    window.location.href = `/events`;
                   }
                 }}
-                className="popup-card button button-go flex items-center justify-center"
+                className="flex-grow text-center py-3 px-8 rounded-md bg-gray-800 text-white font-semibold hover:bg-gray-700 transition duration-200"
               >
-                Go to Page
+                View All
               </button>
 
+              {/* Next Button */}
               <button
                 onClick={handleNext}
-                className="popup-card button button-next flex items-center justify-center"
+                className="flex-none items-center justify-center w-10 h-10 p-2 rounded-md bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800 transition duration-200"
+                aria-label="Next"
               >
-                <span className="mr-2">Next</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-6 h-6" />
               </button>
             </div>
           </motion.div>
