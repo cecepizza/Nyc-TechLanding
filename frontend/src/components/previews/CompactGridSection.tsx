@@ -68,9 +68,9 @@ const CompactGridSection = ({
         animate={{ opacity: 1, y: 0 }}
         className="p-2 md:p-8 rounded-lg shadow-lg"
         style={{
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "1px solid black",
           background:
-            "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1))",
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3))",
         }}
       >
         <div className="text-left mb-6 md:mb-4 flex justify-between items-start ">
@@ -91,7 +91,7 @@ const CompactGridSection = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-black/50">
           {data
             .slice(0, 9)
             .map((item, index) => renderPreviewCard(item, index))}
