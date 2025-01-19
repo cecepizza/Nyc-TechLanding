@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Mono", monospace;
   background-color: var(--background-color);
   color: var(--foreground-color);
   padding-top: 50px;
@@ -198,9 +198,10 @@ button:active {
 
 /* Section Headers */
 .section-header {
-  font-size: 2rem;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 4rem;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   background: linear-gradient(
     to right,
     var(--primary-accent),
@@ -212,7 +213,9 @@ button:active {
   margin-bottom: 16px;
 }
 
+/* Section Subtitles */
 .section-subtitle {
+  font-family: "Helvetica Neue", sans-serif;
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 32px;

@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   background: linear-gradient(90deg, #4a90e2, #007aff, #14b8a6, #6366f1);
-  padding: 12px 20px;
+  padding: 16px 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   font-family: "Roboto", Arial, sans-serif;

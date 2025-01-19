@@ -29,7 +29,7 @@ export default function Events() {
         const eventsData = (data.data?.slice(1) || []).map((row: string[]) => ({
           name: row[0] || "",
           date: row[1] || "",
-          duration: row[2] || "",
+          time: row[2] || "",
           organizer: row[3] || "",
           location: row[4] || "",
           url: row[5] || null,
@@ -61,14 +61,14 @@ export default function Events() {
       <div className="relative min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white overflow-hidden">
         <Boxes className="absolute inset-0 z-0 bg-opacity-70" />
         <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-4 md:p-8">
-          <motion.h1
+          {/* <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
-            className="text-5xl font-semibold text-center mt-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text transition-transform duration-300"
+            className="relative text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600  text-transparent mt-2 mb-0 z-10"
           >
-            Tech Events
-          </motion.h1>
+            Upcoming Events & Meetups
+          </motion.h1> */}
 
           {loading ? (
             <motion.div
@@ -89,7 +89,7 @@ export default function Events() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 rounded-lg shadow-lg p-6"
+                className=" via-slate-900 to-slate-800 opacity-40 rounded-lg shadow-lg p-6"
               >
                 <CalendarComponent onEventClick={handleCalendarEventClick} />
               </motion.div>
@@ -108,7 +108,7 @@ export default function Events() {
                         className="w-[320px] h-[420px] flex items-center justify-center"
                       >
                         <CardContainer containerClassName="w-full h-full">
-                          <CardBody className="w-full h-full">
+                          <CardBody className="flex items-center justify-center w-full h-full">
                             <CardItem>
                               <EventCard event={event} />
                             </CardItem>
@@ -154,7 +154,7 @@ const EventCard = ({ event }: { event: Event }) => (
     {/* Content Section */}
     <div className="p-4 flex flex-col h-[240px]">
       <CardHeader className="p-0 mb-3">
-        <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2">
+        <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2 overflow-hidden">
           {event.name}
         </CardTitle>
       </CardHeader>
