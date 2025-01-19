@@ -75,6 +75,12 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       return () => window.removeEventListener("resize", updateScreenSize);
     }, []);
 
+    const Tooltip = ({ text }: { text: string }) => (
+      <div className="absolute bg-gray-800 text-white text-sm rounded p-1 -translate-x-1/2 bottom-full mb-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        {text}
+      </div>
+    );
+
     const renderDockIcons = () => {
       return [
         {
@@ -104,37 +110,39 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         {
           href: "https://tally.so/r/wvBEdv",
           icon: faBuilding,
-          label: "Office",
+          label: "FractalTech",
           color: "hover:text-green-400",
         },
         {
           href: null,
           icon: faEnvelope,
-          label: "Email",
+          label: "Newsletter",
           color: "hover:text-gray-400",
         },
       ].map(({ href, icon, label, color }, index) => (
-        <DockIcon
-          key={index}
-          size={iconSize}
-          magnification={iconMagnification}
-          mouseX={mouseX}
-        >
-          {href ? (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(color)}
-            >
-              <FontAwesomeIcon icon={icon} size="lg" title={label} />
-            </a>
-          ) : (
-            <div className={cn(color)}>
-              <FontAwesomeIcon icon={icon} size="lg" title={label} />
-            </div>
-          )}
-        </DockIcon>
+        <div className="relative group" key={index}>
+          <DockIcon
+            size={iconSize}
+            magnification={iconMagnification}
+            mouseX={mouseX}
+          >
+            {href ? (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(color)}
+              >
+                <FontAwesomeIcon icon={icon} size="lg" title={label} />
+              </a>
+            ) : (
+              <div className={cn(color)}>
+                <FontAwesomeIcon icon={icon} size="lg" title={label} />
+              </div>
+            )}
+          </DockIcon>
+          <Tooltip text={label} />
+        </div>
       ));
     };
 
