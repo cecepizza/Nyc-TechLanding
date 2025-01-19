@@ -4,7 +4,7 @@
   --fc-today-bg-color: rgba(14, 165, 233, 0.1);
   --fc-page-bg-color: transparent;
   position: relative;
-  background: rgba(20, 20, 20, 0.95);
+  background: rgba(20, 20, 20, 0.65);
   backdrop-filter: blur(10px);
   padding: 10px;
   border: none;
@@ -16,7 +16,7 @@
 
 /* Toolbar Header */
 .fc-header-toolbar {
-  background: rgba(30, 30, 30, 0.9);
+  /* background: rgba(30, 30, 30, 0.9); */
   padding: 1rem;
   border-radius: 12px;
   margin: 0.5rem !important;
@@ -41,7 +41,7 @@
 .fc-daygrid-day:hover {
   background: rgba(40, 40, 40, 0.8);
   border-color: rgba(99, 102, 241, 0.3);
-  border-radius: 16px;
+  border-radius: 0px;
   transform: scale(0.95);
 }
 

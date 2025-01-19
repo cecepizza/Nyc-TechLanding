@@ -81,13 +81,14 @@ const CompactGridSection = ({
             <p className="text-slate-400 text-sm md:text-lg ">{description}</p>
           </div>
           <div className="text-center mt-2 md:mt-0">
-            <a
-              href={link}
-              className="inline-block px-2 py-1 md:px-4 md:py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-md font-medium text-lg md:text-base transition-all duration-200"
-            >
-              <span className="block md:hidden">→</span>
-              <span className="hidden md:block">View All →</span>
-            </a>
+            <span className="hidden md:block">
+              <a
+                href={link}
+                className="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-400 hover:to-blue-700 text-white rounded-lg shadow-lg transition-colors duration-500 transform hover:scale-103"
+              >
+                View All →
+              </a>
+            </span>
           </div>
         </div>
 

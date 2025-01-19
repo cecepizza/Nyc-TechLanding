@@ -45,13 +45,19 @@ export default function Marquee({
 
   const scrollLeft = () => {
     if (marqueeRef.current) {
-      marqueeRef.current.scrollBy({ left: -100, behavior: "smooth" });
+      const { scrollLeft, scrollWidth, clientWidth } = marqueeRef.current;
+      if (scrollLeft > 0) {
+        marqueeRef.current.scrollBy({ left: -400, behavior: "smooth" });
+      } else {
+        // Reset to the end to create an infinite scroll effect
+        marqueeRef.current.scrollLeft = scrollWidth;
+      }
     }
   };
 
   const scrollRight = () => {
     if (marqueeRef.current) {
-      marqueeRef.current.scrollBy({ left: 100, behavior: "smooth" });
+      marqueeRef.current.scrollBy({ left: 400, behavior: "smooth" });
     }
   };
 
@@ -59,7 +65,7 @@ export default function Marquee({
     <div className="relative">
       <button
         onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-cyan-500 text-white p-2 rounded-full shadow-lg hover:bg-cyan-600 hover:shadow-cyan-600/50 transition-all"
+        className="absolute left-0 top-0 h-full transform z-10 bg-gradient-to-b from-cyan-500 to-cyan-800 text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-cyan-600 hover:to-cyan-700 transition-all"
       >
         &lt;
       </button>
@@ -69,7 +75,7 @@ export default function Marquee({
         className={cn(
           "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
           "bg-slate-900 rounded-lg border-2 border-cyan-500 shadow-lg",
-          "hover:shadow-cyan-500/50 transition-all",
+          "hover:shadow-cyan-900/90 transition-all",
           {
             "flex-row": !vertical,
             "flex-col": vertical,
@@ -99,7 +105,7 @@ export default function Marquee({
       </div>
       <button
         onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-cyan-500 text-white p-2 rounded-full shadow-lg hover:bg-cyan-600 hover:shadow-cyan-600/50 transition-all"
+        className="absolute right-0 top-0 h-full transform z-10 bg-gradient-to-b from-cyan-500 to-cyan-800 text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-cyan-600 hover:to-cyan-700 transition-all"
       >
         &gt;
       </button>

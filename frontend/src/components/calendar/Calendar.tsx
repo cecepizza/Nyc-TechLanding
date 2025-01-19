@@ -50,12 +50,12 @@ export const CalendarComponent: React.FC<CalendarComponentProps> = ({
   const isMobile = window.innerWidth < 768;
 
   return (
-    <div className="p-0 max-w-7xl mx-auto">
+    <div>
       <ShineBorder
-        borderRadius={isMobile ? 30 : 16}
+        borderRadius={isMobile ? 10 : 16}
         borderWidth={isMobile ? 10 : 10}
         duration={15}
-        color={["rgba(14, 165, 233, 0.3)", "rgba(99, 102, 241, 0.3)"]}
+        // color={["rgba(14, 165, 233, 0.3)", "rgba(99, 102, 241, 0.3)"]}
         className="w-full bg-transparent"
       >
         <Card className="bg-transparent border-none shadow-none overflow-hidden">
