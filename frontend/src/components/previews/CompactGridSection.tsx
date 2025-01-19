@@ -4,6 +4,7 @@ import EventPreviewCard from "@/components/previews/EventPreviewCard";
 import JobPreviewCard from "@/components/previews/JobPreviewCard";
 import NetworkPreviewCard from "@/components/previews/NetworkPreviewCard";
 import PreviewPopupCard from "@/components/previews/PreviewPopupCard";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const CompactGridSection = ({
   title,
@@ -62,43 +63,45 @@ const CompactGridSection = ({
   };
 
   return (
-    <div className="relative z-10 px-4 md:px-8 mb-8">
+    <div className="relative z-10  mb-2 rounded-xl">
+      <BorderBeam className="absolute inset-0" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-2 md:p-8 rounded-lg shadow-lg"
+        className="p-4 md:p-8 rounded-xl shadow-xl"
         style={{
-          border: "1px solid black",
           background:
-            "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3))",
+            "linear-gradient(135deg, rgba(18, 18, 18, 0.8), rgba(40, 40, 40, 0.2))",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
-        <div className="text-left mb-6 md:mb-4 flex justify-between items-start ">
+        {/* Title and Description */}
+        <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-2xl md:text-4xl font-semibold bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent mb-1 overflow-hidden text-ellipsis whitespace-nowrap md:whitespace-normal">
+            <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
               {title}
             </h2>
-            <p className="text-slate-400 text-sm md:text-lg ">{description}</p>
+            <p className="text-slate-400 text-sm md:text-lg">{description}</p>
           </div>
-          <div className="text-center mt-2 md:mt-0">
-            <span className="hidden md:block">
-              <a
-                href={link}
-                className="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-400 hover:to-blue-700 text-white rounded-lg shadow-lg transition-colors duration-500 transform hover:scale-103"
-              >
-                View All →
-              </a>
-            </span>
+          <div>
+            <a
+              href={link}
+              className="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+            >
+              View All →
+            </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 bg-black/50">
+        {/* Grid of Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {data
             .slice(0, 9)
             .map((item, index) => renderPreviewCard(item, index))}
         </div>
       </motion.div>
 
+      {/* Popup for Card Details */}
       <PreviewPopupCard
         isOpen={isPopupOpen}
         onClose={handleClose}

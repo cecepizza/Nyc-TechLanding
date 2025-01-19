@@ -76,7 +76,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     }, []);
 
     const Tooltip = ({ text }: { text: string }) => (
-      <div className="absolute bg-gray-800 text-white text-sm rounded p-1 -translate-x-1/2 bottom-full mb-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+      <div className="absolute bg-gray-800 text-white text-md rounded p-2 -translate-x bottom-full mb-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         {text}
       </div>
     );
@@ -165,7 +165,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
           marginTop: "35px",
           marginLeft: "30px",
           zIndex: 1000,
-          top: isDesktop ? "40px" : "auto",
+          top: isDesktop ? "60px" : "auto",
           left: isDesktop ? "20px" : "50%",
           bottom: isDesktop ? "auto" : "10px",
           transform: isDesktop ? "none" : "translateX(-50%)",

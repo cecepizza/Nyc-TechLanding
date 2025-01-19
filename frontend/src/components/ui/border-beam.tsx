@@ -14,13 +14,12 @@ interface BorderBeamProps {
 
 export const BorderBeam = ({
   className,
-  size = 200,
-  duration = 15,
-  anchor = 90,
+  size = 900,
+  duration = Math.floor(Math.random() * (60 - 40 + 1)) + 40,
+  anchor = 100,
   borderWidth = 1.5,
-  colorFrom = "#ffaa40",
-  colorTo = "#9c40ff",
-  delay = 0,
+
+  delay = 10,
 }: BorderBeamProps) => {
   return (
     <div
@@ -30,8 +29,8 @@ export const BorderBeam = ({
           "--duration": duration,
           "--anchor": anchor,
           "--border-width": borderWidth,
-          "--color-from": colorFrom,
-          "--color-to": colorTo,
+          "--color-from": "cyan",
+          "--color-to": "darkblue",
           "--delay": `-${delay}s`,
         } as React.CSSProperties
       }
@@ -42,7 +41,7 @@ export const BorderBeam = ({
         "![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]",
 
         // pseudo styles
-        "after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]",
+        "after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-from)_50%,var(--color-to),var(--color-to))] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]",
         className
       )}
     />

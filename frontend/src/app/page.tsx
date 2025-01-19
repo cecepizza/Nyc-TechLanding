@@ -6,7 +6,26 @@ import { config } from "@/config";
 import CompactGridSection from "@/components/previews/CompactGridSection";
 import EngravedTag from "@/components/ui/EngravedTag";
 import { Boxes } from "@/components/ui/background-boxes";
-import OpeningCards from "@/components/ui/OpeningCards";
+
+const IntroSection = () => {
+  return (
+    <div className="relative max-w-4xl mx-auto mt-8 mb-10 px-4 md:px-8 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-cyan-950/80 p-6 md:p-8 rounded-lg shadow-lg"
+      >
+        <p className="text-gray-400 text-base md:text-lg">
+          Explore the heart of NYC's tech ecosystem. Whether you're here to
+          connect with innovators, find exciting events, explore job
+          opportunities, or learn about startups and accelerators, this is your
+          hub to thrive in the vibrant tech community.
+        </p>
+      </motion.div>
+    </div>
+  );
+};
 
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
@@ -45,13 +64,13 @@ const Home = () => {
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mt-4 mb-0 z-10"
+        className="relative text-4xl md:text-5xl mt-14 font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-0 z-10"
       >
-        NYC Tech Hub
+        NYC FractalTech Hub
       </motion.h1>
 
-      {/* Tech Environment Cards */}
-      <OpeningCards />
+      {/* Intro Section */}
+      <IntroSection />
 
       {/* Sections */}
       <div className="space-y-8 px-6 md:px-12">

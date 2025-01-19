@@ -36,23 +36,23 @@ export const CardContainer = ({
 
   const handleMouseEnter = () => {
     setIsMouseEntered(true);
-    if (!containerRef.current) return;
   };
 
   const handleMouseLeave = () => {
-    if (!containerRef.current) return;
     setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    if (containerRef.current)
+      containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
   };
+
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-20 flex items-center justify-center",
+          "py-12 flex items-center justify-center",
           containerClassName
         )}
         style={{
-          perspective: "1000px",
+          perspective: "1500px",
         }}
       >
         <div
@@ -61,7 +61,7 @@ export const CardContainer = ({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            "flex items-center justify-center relative transition-all duration-500 ease-out transform hover:scale-105",
             className
           )}
           style={{
@@ -85,7 +85,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-64 w-64 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-80 w-70 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-800 rounded-xl shadow-2xl relative overflow-hidden [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
         className
       )}
     >
@@ -145,53 +145,34 @@ export const CardItem = ({
     <Tag
       ref={ref}
       className={cn(
-        "w-fit transition duration-200 ease-linear relative",
+        "w-fit transition duration-500 ease-out relative",
         className
       )}
       style={{
         transformStyle: "preserve-3d",
-        perspective: "1000px",
+        perspective: "1500px",
       }}
       {...rest}
     >
       <div
-        className="absolute inset-0 bg-slate-800 rounded-lg"
+        className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-400 to-blue-600 rounded-xl"
         style={{
-          transform: "translateZ(5px)",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          border: "2px solid rgba(0, 255, 255, 0.3)",
+          transform: "translateZ(10px)",
+          boxShadow: "0 12px 30px rgba(0, 0, 0, 0.5)",
         }}
       >
         {children}
       </div>
       <div
-        className="absolute inset-0 bg-slate-800 rounded-lg"
+        className="absolute inset-0 bg-gray-800 rounded-xl"
         style={{
-          transform: "translateZ(-10px) rotateY(180deg)",
+          transform: "translateZ(-15px) rotateY(180deg)",
         }}
       />
       <div
-        className="absolute inset-x-0 top-0 h-2 p-2 bg-slate-700 rounded-lg"
+        className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 opacity-10 rounded-xl"
         style={{
-          transform: "translateY(-10px) rotateX(90deg)",
-        }}
-      />
-      <div
-        className="absolute inset-x-0 bottom-0 h-2 p-2 bg-slate-700 rounded-lg"
-        style={{
-          transform: "translateY(10px) rotateX(90deg)",
-        }}
-      />
-      <div
-        className="absolute inset-y-0 left-0 w-2 p-2 bg-slate-700 rounded-lg"
-        style={{
-          transform: "translateX(-10px) rotateY(90deg)",
-        }}
-      />
-      <div
-        className="absolute inset-y-0 right-0 w-2 p-2 bg-slate-700 rounded-lg"
-        style={{
-          transform: "translateX(10px) rotateY(90deg)",
+          transform: "translateZ(-25px)",
         }}
       />
     </Tag>
