@@ -1,58 +1,15 @@
-/* General Page Background */
-.jobs-page {
-    background: linear-gradient(135deg, #0b0f1a, #101828, #121212);
-    min-height: 100vh;
-    color: #e0e0e0;
-    overflow-x: hidden;
-  }
-  
-  /* Filters Section */
-  .jobs-filters {
-    background: linear-gradient(135deg, #141c2b, #1a2333);
-    color: #d1d5db;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
-    transition: background 0.3s ease;
-  }
-  
-  .jobs-filters select,
-  .jobs-filters input {
-    color: #cbd5e1;
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .jobs-filters select:hover,
-  .jobs-filters input:hover {
-    background-color: #1e293b;
-    border-color: #60a5fa;
-    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
-  }
-  
-  .jobs-filters select:focus,
-  .jobs-filters input:focus {
-    outline: none;
-    box-shadow: 0 0 10px #60a5fa;
-    border-color: #60a5fa;
-  }
-  
-  /* Jobs Grid */
-  .jobs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  /* Job Cards */
-  .job-card {
+.job-card {
     background: linear-gradient(135deg, #10151e, #161d2b);
     border: 1px solid #1e293b;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem 1.2rem;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    opacity: 0.75;
-    background-blend-mode: difference;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
   }
   
   .job-card:hover {
@@ -61,15 +18,51 @@
     box-shadow: 0px 8px 20px rgba(37, 99, 235, 0.6);
   }
   
+  .job-card:hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #38bdf8, #9333ea);
+    opacity: 0.2;
+    z-index: -1;
+  }
+  
   .job-card-content h2 {
-    color: #38bdf8;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #38bdf8, #3b82f6, #9333ea);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: left;
+    margin-bottom: 0.5rem;
   }
   
   .job-card-content p {
+    font-size: 0.9rem;
     color: #94a3b8;
+    margin-bottom: 0.25rem;
+    text-align: left;
   }
   
-  /* Job Icons */
+  .job-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #e5e7eb;
+    margin-top: 1rem;
+    border-top: 1px solid #1e293b;
+    padding-top: 0.5rem;
+  }
+  
+  /* Interactive Glow Effects */
+  .job-card:hover .job-card-content h2 {
+    color: #e0f2fe;
+    text-shadow: 0px 0px 5px #60a5fa, 0px 0px 10px #3b82f6;
+  }
+  
   .job-card-icon img {
     width: 50px;
     height: 50px;
@@ -78,44 +71,16 @@
   
   .job-card-icon div {
     background: linear-gradient(135deg, #0f172a, #1e293b);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
-  /* Header Section */
-  .jobs-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: transparent;
-    background: linear-gradient(90deg, #38bdf8, #3b82f6, #9333ea);
-    -webkit-background-clip: text;
-    background-clip: text;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  /* Search and Filters */
-  .jobs-search-input {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 8px;
-    padding: 0.75rem;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-  }
-  
-  .jobs-filter-dropdown {
-    border-radius: 8px;
-    padding: 0.75rem;
-    min-width: 200px;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  /* Glow Effect for Active Cards */
-  .job-card:hover .job-card-content h2 {
-    color: #e0f2fe;
-    text-shadow: 0px 0px 5px #60a5fa, 0px 0px 10px #3b82f6;
-  }
-  
-  .job-card:hover p {
-    text-shadow: 0px 0px 3px #94a3b8, 0px 0px 5px #1e293b;
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
   }
