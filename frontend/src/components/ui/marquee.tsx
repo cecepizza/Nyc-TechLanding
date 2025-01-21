@@ -65,7 +65,7 @@ export default function Marquee({
     <div className="relative">
       <button
         onClick={scrollLeft}
-        className="absolute left-0 top-0 h-full transform z-10 bg-gradient-to-b from-cyan-500 to-cyan-800 text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-cyan-600 hover:to-cyan-700 transition-all"
+        className="absolute left-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all"
       >
         &lt;
       </button>
@@ -105,7 +105,7 @@ export default function Marquee({
       </div>
       <button
         onClick={scrollRight}
-        className="absolute right-0 top-0 h-full transform z-10 bg-gradient-to-b from-cyan-500 to-cyan-800 text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-cyan-600 hover:to-cyan-700 transition-all"
+        className="absolute right-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all"
       >
         &gt;
       </button>

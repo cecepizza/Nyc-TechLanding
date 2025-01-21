@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { useEvents } from "./hooks/useEvents";
 import ShineBorder from "@/components/ui/shine-border";
 import { Event } from "./types";
-
+import "./Calendar.css";
 function getRandomColor() {
   const colors = [
     "bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400",
@@ -64,7 +64,7 @@ export const CalendarComponent: React.FC<CalendarComponentProps> = ({
               plugins={[dayGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
               headerToolbar={{
-                left: "prev,next",
+                left: "prev,next today",
                 center: "title",
                 right: isMobile ? "" : "addEventButton",
               }}
@@ -79,9 +79,7 @@ export const CalendarComponent: React.FC<CalendarComponentProps> = ({
               height={isMobile ? "auto" : "600px"}
               contentHeight="auto"
               aspectRatio={isMobile ? 1.2 : 1.8}
-              eventColor="#0EA5E9"
-              eventTextColor="white"
-              dayMaxEvents={isMobile ? 1 : 3}
+              dayMaxEvents={isMobile ? 2 : 5}
               titleFormat={{ year: "numeric", month: "long" }}
               buttonText={{
                 today: "Today",
