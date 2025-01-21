@@ -19,25 +19,6 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
 }) => {
   const [index, setIndex] = useState(currentIndex);
 
-  // Update index when currentIndex prop changes
-  useEffect(() => {
-    setIndex(currentIndex);
-  }, [currentIndex]);
-
-  // Add event listener for Escape key
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
   const handleNext = () => {
     setIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
@@ -45,6 +26,29 @@ const PreviewPopupCard: React.FC<PreviewPopupCardProps> = ({
   const handlePrevious = () => {
     setIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
   };
+
+  // Update index when currentIndex prop changes
+  useEffect(() => {
+    setIndex(currentIndex);
+  }, [currentIndex]);
+
+  // Add event listener for Escape, Left Arrow, and Right Arrow keys
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      } else if (event.key === "ArrowRight") {
+        handleNext();
+      } else if (event.key === "ArrowLeft") {
+        handlePrevious();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose, handleNext, handlePrevious]);
 
   if (!data || data.length === 0) return null;
 

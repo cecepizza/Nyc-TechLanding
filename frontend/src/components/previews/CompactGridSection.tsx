@@ -4,7 +4,7 @@ import EventPreviewCard from "@/components/previews/EventPreviewCard";
 import JobPreviewCard from "@/components/previews/JobPreviewCard";
 import NetworkPreviewCard from "@/components/previews/NetworkPreviewCard";
 import PreviewPopupCard from "@/components/previews/PreviewPopupCard";
-import { BorderBeam } from "@/components/ui/border-beam";
+// import { BorderBeam } from "@/components/ui/border-beam";
 
 const CompactGridSection = ({
   title,
@@ -32,30 +32,53 @@ const CompactGridSection = ({
   };
 
   const renderPreviewCard = (item: string[], index: number) => {
+    const cardVariants = {
+      initial: { scale: 1, boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)" },
+      hover: { scale: 1, boxShadow: "0px 10px 20px rgba(0, 0, 0, .5)" },
+    };
+
     switch (section) {
       case "events":
         return (
-          <EventPreviewCard
+          <motion.div
             key={index}
-            data={item}
-            onClick={() => handleCardClick(index)}
-          />
+            variants={cardVariants}
+            initial="initial"
+            whileHover="hover"
+          >
+            <EventPreviewCard
+              data={item}
+              onClick={() => handleCardClick(index)}
+            />
+          </motion.div>
         );
       case "jobs":
         return (
-          <JobPreviewCard
+          <motion.div
             key={index}
-            data={item}
-            onClick={() => handleCardClick(index)}
-          />
+            variants={cardVariants}
+            initial="initial"
+            whileHover="hover"
+          >
+            <JobPreviewCard
+              data={item}
+              onClick={() => handleCardClick(index)}
+            />
+          </motion.div>
         );
       case "network":
         return (
-          <NetworkPreviewCard
+          <motion.div
             key={index}
-            data={item}
-            onClick={() => handleCardClick(index)}
-          />
+            variants={cardVariants}
+            initial="initial"
+            whileHover="hover"
+          >
+            <NetworkPreviewCard
+              data={item}
+              onClick={() => handleCardClick(index)}
+            />
+          </motion.div>
         );
       default:
         return null;
@@ -63,30 +86,39 @@ const CompactGridSection = ({
   };
 
   return (
-    <div className="relative z-10  mb-2 rounded-xl">
-      <BorderBeam className="absolute inset-0" />
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="p-4 md:p-8 rounded-xl shadow-xl"
+    <motion.div
+      className="relative z-10 mb-8 rounded-xl"
+      whileHover={{
+        scale: 1.009,
+        boxShadow:
+          "0px 12px 25px rgba(255, 255, 255, 0.15), 0px 0px 20px rgba(99, 102, 241, 0.5)",
+        border: "1px solid rgba(255, 255, 255, 0.2)",
+      }}
+      transition={{
+        duration: 0.2,
+        ease: "easeInOut",
+      }}
+    >
+      <div
+        className="p-6 md:p-8 rounded-xl shadow-lg"
         style={{
           background:
-            "linear-gradient(135deg, rgba(18, 18, 18, 0.8), rgba(40, 40, 40, 0.2))",
+            "linear-gradient(135deg, rgba(18, 18, 18, 0.8), rgba(40, 40, 40, 0.4))",
           border: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
         {/* Title and Description */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
           <div>
             <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-2">
               {title}
             </h2>
             <p className="text-slate-400 text-sm md:text-lg">{description}</p>
           </div>
-          <div>
+          <div className="mt-4 sm:mt-0">
             <a
               href={link}
-              className="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+              className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-400 text-white rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
             >
               View All →
             </a>
@@ -94,12 +126,12 @@ const CompactGridSection = ({
         </div>
 
         {/* Grid of Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {data
             .slice(0, 9)
             .map((item, index) => renderPreviewCard(item, index))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Popup for Card Details */}
       <PreviewPopupCard
@@ -109,7 +141,7 @@ const CompactGridSection = ({
         currentIndex={currentIndex}
         section={section}
       />
-    </div>
+    </motion.div>
   );
 };
 

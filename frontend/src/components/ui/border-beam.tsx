@@ -9,17 +9,17 @@ interface BorderBeamProps {
   colorFrom?: string;
   colorTo?: string;
   delay?: number;
-  children?: React.ReactNode;
 }
 
 export const BorderBeam = ({
   className,
-  size = 900,
-  duration = Math.floor(Math.random() * (60 - 40 + 1)) + 40,
-  anchor = 100,
+  size = 600,
+  duration = 15,
+  anchor = 90,
   borderWidth = 1.5,
-
-  delay = 10,
+  colorFrom = "#40e0d0",
+  colorTo = "#00ced1",
+  delay = 0,
 }: BorderBeamProps) => {
   return (
     <div
@@ -29,8 +29,8 @@ export const BorderBeam = ({
           "--duration": duration,
           "--anchor": anchor,
           "--border-width": borderWidth,
-          "--color-from": "cyan",
-          "--color-to": "darkblue",
+          "--color-from": colorFrom,
+          "--color-to": colorTo,
           "--delay": `-${delay}s`,
         } as React.CSSProperties
       }
@@ -41,7 +41,7 @@ export const BorderBeam = ({
         "![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]",
 
         // pseudo styles
-        "after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-from)_50%,var(--color-to),var(--color-to))] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]",
+        "after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]",
         className
       )}
     />
