@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Calendar, MapPin, Clock, ExternalLink, User, Tag } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { CalendarComponent } from "@/components/calendar/Calendar";
-import { SlidingCard } from "@/components/ui/EventPopupCard";
+import { CalendarComponent } from "@/app/events/calendar/Calendar";
+import { SlidingCard } from "@/app/events/EventPopupCard";
 import { Boxes } from "@/components/ui/background-boxes";
-import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
-import Marquee from "@/components/ui/marquee";
-import "@/components/calendar/Calendar.css";
 import { motion } from "framer-motion";
 import { config } from "@/config";
-import { LampContainer } from "@/components/ui/lamp";
-import { Event } from "@/components/calendar/types";
+import { Event } from "@/app/events/calendar/types";
+import MarqueeSection from "./MarqueeSection";
+import "./Events.css";
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -37,11 +33,21 @@ export default function Events() {
           event_type: row[7] || "",
           last_updated: row[8] || "",
         }));
-        eventsData.sort(
+
+        const uniqueEvents = eventsData.filter(
+          (event, index, self) =>
+            index ===
+            self.findIndex(
+              (e) => e.name === event.name && e.date === event.date
+            )
+        );
+
+        uniqueEvents.sort(
           (a: Event, b: Event) =>
             new Date(a.date).getTime() - new Date(b.date).getTime()
         );
-        setEvents(eventsData);
+
+        setEvents(uniqueEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
       } finally {
@@ -57,162 +63,69 @@ export default function Events() {
   };
 
   return (
-    <LampContainer>
-      <div className="relative min-h-screen bg-gradient-to-br from-black via-slate-900 to-gray-800 text-white overflow-hidden">
-        <Boxes className="absolute inset-0 z-0 bg-opacity-70" />
-        <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-4 md:p-8">
-          {/* <motion.h1
+    <div className="events-page">
+      <Boxes className="absolute inset-0 z-0 bg-opacity-70" />
+      <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-4 md:p-8">
+        {/* Page Header */}
+        <div className="events-header">
+          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             whileHover={{ scale: 1.05 }}
-            className="relative text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600  text-transparent mt-2 mb-0 z-10"
+            className="text-5xl font-extrabold text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text drop-shadow-lg"
           >
             Upcoming Events & Meetups
-          </motion.h1> */}
-
-          {loading ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center justify-center py-20 space-y-4"
-            >
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" />
-              </div>
-              <div className="text-cyan-400 text-lg">Loading events...</div>
-            </motion.div>
-          ) : (
-            <>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className=" via-slate-900 to-slate-800 opacity-40 rounded-lg shadow-lg p-6"
-              >
-                <CalendarComponent onEventClick={handleCalendarEventClick} />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="overflow-hidden"
-              >
-                <Marquee pauseOnHover className="py-4">
-                  <div className="flex gap-6 px-6">
-                    {events.map((event, index) => (
-                      <div
-                        key={index}
-                        className="w-[320px] h-[420px] flex items-center justify-center"
-                      >
-                        <CardContainer containerClassName="w-full h-full">
-                          <CardBody className="flex items-center justify-center w-full h-full">
-                            <CardItem>
-                              <EventCard event={event} />
-                            </CardItem>
-                          </CardBody>
-                        </CardContainer>
-                      </div>
-                    ))}
-                  </div>
-                </Marquee>
-              </motion.div>
-            </>
-          )}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            whileHover={{ scale: 1.02 }}
+            className="text-lg text-gray-400 mt-4"
+          >
+            Discover and connect at our upcoming events.
+          </motion.p>
         </div>
 
-        <SlidingCard
-          isOpen={!!selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          event={selectedEvent}
-        />
+        {/* Loading Indicator */}
+        {loading ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="loading-indicator"
+          >
+            <div className="flex space-x-2">
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+              <div className="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" />
+            </div>
+            <div className="text-cyan-400">Loading events...</div>
+          </motion.div>
+        ) : (
+          <>
+            {/* Calendar Section */}
+            <motion.div
+              className="calendar-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <CalendarComponent onEventClick={handleCalendarEventClick} />
+            </motion.div>
+
+            {/* Marquee Section */}
+            <MarqueeSection events={events} />
+          </>
+        )}
       </div>
-    </LampContainer>
+
+      {/* Sliding Event Popup */}
+      <SlidingCard
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        event={selectedEvent}
+      />
+    </div>
   );
 }
-
-const EventCard = ({ event }: { event: Event }) => (
-  <Card
-    className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg 
-                   shadow-xl hover:shadow-2xl transition-all duration-300 
-                   w-[300px] h-[400px]"
-  >
-    {/* Image Section */}
-    <div className="h-[160px] flex-shrink-0">
-      {event.cover_image_url ? (
-        <img
-          src={event.cover_image_url}
-          alt=""
-          className="w-full h-full object-cover rounded-t-lg"
-        />
-      ) : (
-        <div className="w-full h-full bg-gradient-to-r from-slate-800 to-slate-700 rounded-t-lg" />
-      )}
-    </div>
-    {/* Content Section */}
-    <div className="p-4 flex flex-col h-[240px]">
-      <CardHeader className="p-0 mb-3">
-        <CardTitle className="text-lg font-semibold text-white/90 line-clamp-2 overflow-hidden">
-          {event.name}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-0 flex flex-col h-full">
-        <div className="space-y-2 mb-auto">
-          <InfoRow
-            icon={<Calendar className="w-4 h-4 text-cyan-400" />}
-            text={event.date}
-          />
-          {event.duration && (
-            <InfoRow
-              icon={<Clock className="w-4 h-4 text-emerald-400" />}
-              text={event.duration}
-            />
-          )}
-          <InfoRow
-            icon={<User className="w-4 h-4 text-rose-400" />}
-            text={truncateText(event.organizer, 30)}
-          />
-          <InfoRow
-            icon={<MapPin className="w-4 h-4 text-violet-400" />}
-            text={event.location}
-          />
-          <InfoRow
-            icon={<Tag className="w-4 h-4 text-amber-400" />}
-            text={event.event_type}
-          />
-        </div>
-
-        {event.url && (
-          <div className="pt-2 relative">
-            <a
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 
-                         bg-cyan-500 hover:bg-cyan-600 text-white rounded-md 
-                         font-medium text-sm transition-all duration-200
-                         hover:translate-y-[-1px] active:translate-y-0"
-              onClick={(e) => e.stopPropagation()}
-            >
-              View Event <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-        )}
-      </CardContent>
-    </div>
-  </Card>
-);
-
-const InfoRow = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
-  <div className="flex items-center gap-2 text-white/80 hover:text-white/90 transition-colors">
-    <span>{icon}</span>
-    <span className="text-sm font-mono truncate">{text}</span>
-  </div>
-);
-
-const truncateText = (text: string, maxLength: number) => {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + "...";
-};

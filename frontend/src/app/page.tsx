@@ -6,56 +6,61 @@ import { config } from "@/config";
 import CompactGridSection from "@/components/previews/CompactGridSection";
 import EngravedTag from "@/components/ui/EngravedTag";
 import { Boxes } from "@/components/ui/background-boxes";
-
-const IntroSection = () => {
-  return (
-    <div className="relative max-w-4xl mx-auto mt-8 mb-10 px-4 md:px-8 text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-cyan-950/80 p-6 md:p-8 rounded-lg shadow-lg"
-      >
-        <p className="text-gray-400 text-base md:text-lg">
-          Explore the heart of NYC's tech ecosystem. Whether you're here to
-          connect with innovators, find exciting events, explore job
-          opportunities, or learn about startups and accelerators, this is your
-          hub to thrive in the vibrant tech community.
-        </p>
-      </motion.div>
-    </div>
-  );
-};
+import { BorderBeam } from "@/components/ui/border-beam";
+import IntroSection from "@/components/ui/introSection";
 
 const Home = () => {
+  useEffect(() => {
+    console.log("Rendering Home Component");
+  }, []);
+
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
   const [jobsPreview, setJobsPreview] = useState<string[][]>([]);
-  const [ecosystemPreview, setEcosystemPreview] = useState<string[][]>([]);
+  const [networkPreview, setNetworkPreview] = useState<string[][]>([]);
 
   useEffect(() => {
-    const fetchPreviews = async () => {
+    async function fetchData() {
       try {
-        const [eventsRes, jobsRes, ecosystemRes] = await Promise.all([
+        const [eventsRes, jobsRes, networkRes] = await Promise.all([
           fetch(`${config.backendUrl}/api/sheets/events?limit=6`),
           fetch(`${config.backendUrl}/api/sheets/jobs?limit=6`),
           fetch(`${config.backendUrl}/api/sheets/startups?limit=6`),
         ]);
 
-        setEventsPreview((await eventsRes.json()).data.slice(1) || []);
-        setJobsPreview((await jobsRes.json()).data.slice(1) || []);
-        setEcosystemPreview((await ecosystemRes.json()).data || []);
+        const eventsData = (await eventsRes.json()).data.slice(1) || [];
+        const jobsData = (await jobsRes.json()).data.slice(1) || [];
+        const networkData = (await networkRes.json()).data.slice(1) || [];
+
+        console.log("Events Data:", eventsData);
+        console.log("Jobs Data:", jobsData);
+        console.log("Network Data:", networkData);
+
+        setEventsPreview(eventsData);
+        setJobsPreview(jobsData);
+        setNetworkPreview(networkData);
       } catch (error) {
         console.error("Error fetching preview data:", error);
       }
-    };
-
-    fetchPreviews();
+    }
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log("Events Preview Updated:", eventsPreview);
+  }, [eventsPreview]);
+
+  useEffect(() => {
+    console.log("Jobs Preview Updated:", jobsPreview);
+  }, [jobsPreview]);
+
+  useEffect(() => {
+    console.log("Network Preview Updated:", networkPreview);
+  }, [networkPreview]);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-950 text-white overflow-hidden">
       {/* Background Boxes */}
-      <Boxes className="absolute inset-0 transform" />
+      <Boxes className="absolute inset-0 z-6  transform" />
 
       {/* Engraved Tag */}
       <EngravedTag />
@@ -64,16 +69,17 @@ const Home = () => {
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative text-4xl md:text-5xl mt-14 font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-0 z-10"
+        className="relative text-4xl md:text-5xl mt-16 sm:mb-10 md:mt-14 font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-0 z-10 font-sans"
       >
-        NYC FractalTech Hub
+        NYC Tech Hub
       </motion.h1>
+      <BorderBeam className="z-0 fixed rounded-sm" />
 
       {/* Intro Section */}
       <IntroSection />
 
       {/* Sections */}
-      <div className="space-y-8 px-6 md:px-12">
+      <div className="space-y-8 px-4 md:px-12">
         <CompactGridSection
           title="Upcoming Events"
           description="Discover the latest tech events happening in NYC."
@@ -91,9 +97,9 @@ const Home = () => {
         <CompactGridSection
           title="NYC Tech Ecosystem"
           description="Learn about startups, VCs, and accelerators in NYC."
-          link="/ecosystem"
-          data={ecosystemPreview}
-          section="ecosystem"
+          link="/network"
+          data={networkPreview}
+          section="network"
         />
       </div>
     </div>

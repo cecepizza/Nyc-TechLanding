@@ -18,7 +18,7 @@ const EventPreviewCard: React.FC<EventPreviewCardProps> = ({
       whileHover={{
         scale: 1.01,
         background:
-          "linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.0001))",
+          "linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, .3))",
         boxShadow: "0px 0px 5px var(--card-hover-shadow)",
       }}
       className="card flex items-center gap-2 md:gap-4 transition-transform"

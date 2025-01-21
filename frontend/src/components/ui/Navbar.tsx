@@ -7,7 +7,7 @@ const navLinks = [
   { label: "Home", path: "/", key: "Home" },
   { label: "Jobs", path: "/jobs", key: "Jobs" },
   { label: "Events", path: "/events", key: "Events" },
-  { label: "Network", path: "/ecosystem", key: "Ecosystem" },
+  { label: "Network", path: "/network", key: "Network" },
   { label: "FAQ", path: "/about", key: "About" },
 ];
 

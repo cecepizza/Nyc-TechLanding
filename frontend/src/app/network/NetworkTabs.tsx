@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import FloatingCard from "@/components/ui/NetworkFloatingCard";
+import FloatingCard from "./NetworkFloatingCard";
 
 interface TabsProps {
   startups: string[][];

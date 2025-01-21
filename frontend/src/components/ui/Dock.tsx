@@ -69,7 +69,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
-      const updateScreenSize = () => setIsDesktop(window.innerWidth >= 1024);
+      const updateScreenSize = () => setIsDesktop(window.innerWidth >= 1200);
       updateScreenSize();
       window.addEventListener("resize", updateScreenSize);
       return () => window.removeEventListener("resize", updateScreenSize);
@@ -82,6 +82,11 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     );
 
     const renderDockIcons = () => {
+      const adjustedIconSize = isDesktop ? iconSize * 1.05 : iconSize;
+      const adjustedMagnification = isDesktop
+        ? iconMagnification * 1.05
+        : iconMagnification;
+
       return [
         {
           href: "https://linktr.ee/nyctech",
@@ -122,8 +127,8 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       ].map(({ href, icon, label, color }, index) => (
         <div className="relative group" key={index}>
           <DockIcon
-            size={iconSize}
-            magnification={iconMagnification}
+            size={adjustedIconSize}
+            magnification={adjustedMagnification}
             mouseX={mouseX}
           >
             {href ? (
@@ -161,9 +166,9 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
           ...style,
           opacity: isHovered ? 0.9 : 0.7,
           position: "fixed",
-          padding: isDesktop ? "10px" : "5px",
+          padding: isDesktop ? "12px" : "8px",
           marginTop: "35px",
-          marginLeft: "30px",
+          //   marginLeft: "30px",
           zIndex: 1000,
           top: isDesktop ? "60px" : "auto",
           left: isDesktop ? "20px" : "50%",
