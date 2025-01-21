@@ -2,7 +2,7 @@ import { EngravedTagContainer, EngravedTagItem } from "./EngravedTagCard";
 
 const EngravedTag = () => {
   return (
-    <EngravedTagContainer className="absolute top-0 right-0 z-10 mt-4 mr-6">
+    <EngravedTagContainer className="absolute top-9 right-0 z-10 mt-8 mr-6">
       <EngravedTagItem className="absolute top-3 right-3 shiny">
         <div
           className="p-3 rounded border-2 shadow-inner"

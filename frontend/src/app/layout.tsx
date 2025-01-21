@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
 import { Dock } from "@/components/ui/Dock";
+import EngravedTag from "@/components/ui/EngravedTag";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,9 @@ export default function RootLayout({
       >
         <Dock activeItem={activeItem} onNavigate={handleNavigate} />
         <Navbar activeItem={activeItem} onNavigate={handleNavigate} />
+        <div className="hidden sm:block">
+          <EngravedTag />
+        </div>
         <main>{children}</main>
       </body>
     </html>

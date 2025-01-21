@@ -7,6 +7,8 @@ import { useEvents } from "./hooks/useEvents";
 import ShineBorder from "@/components/ui/shine-border";
 import { Event } from "./types";
 import "./Calendar.css";
+import { motion } from "framer-motion";
+
 function getRandomColor() {
   const colors = [
     "bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400",
@@ -49,8 +51,18 @@ export const CalendarComponent: React.FC<CalendarComponentProps> = ({
 
   const isMobile = window.innerWidth < 768;
 
+  const dayCellClassNames = (dayInfo: any) => {
+    const today = new Date();
+    const isPast = dayInfo.date < today.setHours(0, 0, 0, 0); // Compare only the date part
+    return isPast ? ["past"] : [];
+  };
+
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <ShineBorder
         borderRadius={isMobile ? 10 : 16}
         borderWidth={isMobile ? 10 : 10}
@@ -90,10 +102,11 @@ export const CalendarComponent: React.FC<CalendarComponentProps> = ({
                 "transition-all duration-300 border border-white/20",
                 getRandomColor(),
               ]}
+              dayCellClassNames={dayCellClassNames}
             />
           </div>
         </Card>
       </ShineBorder>
-    </div>
+    </motion.div>
   );
 };

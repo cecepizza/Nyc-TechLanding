@@ -3,14 +3,14 @@
     background: linear-gradient(135deg, #0b0f1a, #101828, #121212);
     color: #e0e0e0;
     min-height: 100vh;
-    padding: 2rem;
+    padding: 1rem;
     position: relative;
   }
   
   /* Page Header */
   .events-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
     z-index: 1;
     position: relative;
     overflow: visible;
@@ -24,7 +24,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 1rem;
+    margin-bottom: rem;
     line-height: 1.2;
   }
   
@@ -37,7 +37,7 @@
   /* Calendar Section */
   .calendar-section {
     background: linear-gradient(135deg, #161d2b, #202737, .9);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 2rem;
@@ -50,6 +50,9 @@
     padding: 2rem 0;
     background: linear-gradient(135deg, #0b0f1a, #101828, #121212);
   }
+
+  
+
   
   .marquee-card-container {
     display: flex;
@@ -220,45 +223,13 @@
   /* Responsive Design */
   @media (max-width: 768px) {
     .events-header h1 {
-      font-size: 2rem;
+        margin-bottom: 0rem;
+        margin-top: 1rem;
+      font-size: 1.8rem;
     }
   
     .events-header p {
-      font-size: 0.9rem;
-    }
-  
-    .marquee-card-container {
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-  
-    .marquee-card {
-      width: 100%;
-    }
-  
-    .image-container {
-      height: 150px;
-    }
-  
-    .card-body {
-      height: 320px;
-      width: 260px;
-    }
-  
-    .marquee-card .card-content {
-      padding: 0.8rem;
-    }
-  
-    .marquee-card .card-title {
-      font-size: 1rem;
-    }
-  
-    .marquee-card .info-row {
       font-size: 0.85rem;
     }
   
-    .marquee-card .event-link {
-      font-size: 0.8rem;
-    }
   }
