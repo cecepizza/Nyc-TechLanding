@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Boxes } from "@/components/ui/background-boxes";
 import { config } from "@/config";
-import Tabs from "@/components/ui/NetworkTabs";
+import Tabs from "@/app/network/NetworkTabs";
 
 export default function Ecosystem() {
   const [startups, setStartups] = useState<string[][]>([]);

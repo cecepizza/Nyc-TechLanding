@@ -30,12 +30,12 @@ const IntroSection = () => {
 const Home = () => {
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
   const [jobsPreview, setJobsPreview] = useState<string[][]>([]);
-  const [ecosystemPreview, setEcosystemPreview] = useState<string[][]>([]);
+  const [networkPreview, setNetworkPreview] = useState<string[][]>([]);
 
   useEffect(() => {
     const fetchPreviews = async () => {
       try {
-        const [eventsRes, jobsRes, ecosystemRes] = await Promise.all([
+        const [eventsRes, jobsRes, networkRes] = await Promise.all([
           fetch(`${config.backendUrl}/api/sheets/events?limit=6`),
           fetch(`${config.backendUrl}/api/sheets/jobs?limit=6`),
           fetch(`${config.backendUrl}/api/sheets/startups?limit=6`),
@@ -43,7 +43,7 @@ const Home = () => {
 
         setEventsPreview((await eventsRes.json()).data.slice(1) || []);
         setJobsPreview((await jobsRes.json()).data.slice(1) || []);
-        setEcosystemPreview((await ecosystemRes.json()).data || []);
+        setNetworkPreview((await networkRes.json()).data || []);
       } catch (error) {
         console.error("Error fetching preview data:", error);
       }
@@ -91,9 +91,9 @@ const Home = () => {
         <CompactGridSection
           title="NYC Tech Ecosystem"
           description="Learn about startups, VCs, and accelerators in NYC."
-          link="/ecosystem"
-          data={ecosystemPreview}
-          section="ecosystem"
+          link="/network"
+          data={networkPreview}
+          section="network"
         />
       </div>
     </div>
