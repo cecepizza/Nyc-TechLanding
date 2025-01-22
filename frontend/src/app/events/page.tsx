@@ -16,13 +16,20 @@ export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   useEffect(() => {
-    async function fetchEvents() {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(config.backendUrl + "/api/sheets/events");
-        if (!response.ok)
-          throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        const eventsData = (data.data?.slice(1) || []).map((row: string[]) => ({
+        const endpoints = [config.backendUrl + "/api/sheets/events"];
+        const responses = await Promise.all(
+          endpoints.map(async (endpoint) => {
+            const response = await fetch(endpoint);
+            if (!response.ok)
+              throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+          })
+        );
+        const data = responses[0].data;
+        const eventsData = (data?.slice(1) || []).map((row: string[]) => ({
           name: row[0] || "",
           date: row[1] || "",
           time: row[2] || "",
@@ -53,9 +60,8 @@ export default function Events() {
       } finally {
         setLoading(false);
       }
-    }
-
-    fetchEvents();
+    };
+    fetchData();
   }, []);
 
   const handleCalendarEventClick = (event: Event) => {

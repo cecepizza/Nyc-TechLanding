@@ -14,9 +14,11 @@ export default function Jobs() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchJobs() {
+    const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(config.backendUrl + "/api/sheets/jobs");
         if (!response.ok) {
@@ -26,11 +28,14 @@ export default function Jobs() {
         setJobs(data.data || []);
       } catch (error) {
         console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
       }
-    }
-
-    fetchJobs();
+    };
+    fetchData();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   const filteredJobs = jobs
     .slice(1)

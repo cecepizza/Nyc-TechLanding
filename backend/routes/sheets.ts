@@ -22,21 +22,30 @@ const auth = new google.auth.GoogleAuth({
 
 const sheets = google.sheets({ version: "v4", auth });
 
+// Simple in-memory cache
+const cache: { [key: string]: any } = {};
+
+async function fetchData(spreadsheetId: string, range: string) {
+  if (cache[`${spreadsheetId}-${range}`]) {
+    return cache[`${spreadsheetId}-${range}`]; // Return cached data if available
+  }
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range,
+  });
+  cache[`${spreadsheetId}-${range}`] = response.data; // Cache the fetched data
+  return response.data;
+}
+
 // test route
 router.get("/test", async (req: Request, res: Response) => {
-  console.log("Recieved request on /api/sheets/test");
+  console.log("Received request on /api/sheets/test");
   try {
-    let rows;
-    // fetch data from exisiting google sheet
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
-      // fetch data from a specific range in a specific sheet
-      range: "jobs!2:2",
-    });
-
-    rows = response.data.values;
-    console.log("data retrieved:", rows);
-    res.json({ data: rows });
+    const response = await fetchData(
+      "1HRvvJaqWDMi4zJfWoE36Ky5-f7H2Y4vduat2HdSrrxg",
+      "jobs!2:2"
+    );
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "failed to fetch data" });
@@ -45,13 +54,13 @@ router.get("/test", async (req: Request, res: Response) => {
 
 // Jobs Route
 router.get("/jobs", async (req: Request, res: Response) => {
-  console.log("Recieved request on /api/sheets/jobs");
+  console.log("Received request on /api/sheets/jobs");
   try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "jobs!A1:Z100",
-    });
-    res.json({ data: response.data.values });
+    const response = await fetchData(
+      process.env.GOOGLE_SHEETS_ID,
+      "jobs!A1:Z100"
+    );
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error fetching jobs data:", error);
     res.status(500).json({ error: "failed to fetch jobs data" });
@@ -60,13 +69,13 @@ router.get("/jobs", async (req: Request, res: Response) => {
 
 // startups route
 router.get("/startups", async (req: Request, res: Response) => {
-  console.log("Recieved request on /api/sheets/startups");
+  console.log("Received request on /api/sheets/startups");
   try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "startups!A1:Z100",
-    });
-    res.json({ data: response.data.values });
+    const response = await fetchData(
+      process.env.GOOGLE_SHEETS_ID,
+      "startups!A1:Z100"
+    );
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error fetching startups data:", error);
     res.status(500).json({ error: "failed to fetch startups data" });
@@ -77,11 +86,11 @@ router.get("/startups", async (req: Request, res: Response) => {
 router.get("/vcs", async (req: Request, res: Response) => {
   console.log("Received request on /api/sheets/vcs");
   try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "vcs!A1:Z100",
-    });
-    res.json({ data: response.data.values });
+    const response = await fetchData(
+      process.env.GOOGLE_SHEETS_ID,
+      "vcs!A1:Z100"
+    );
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error fetching vcs data:", error);
     res.status(500).json({ error: "failed to fetch vcs data" });
@@ -92,11 +101,11 @@ router.get("/vcs", async (req: Request, res: Response) => {
 router.get("/accelerators", async (req: Request, res: Response) => {
   console.log("Received request on /api/sheets/accelerators");
   try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "accelerators!A1:Z100",
-    });
-    res.json({ data: response.data.values });
+    const response = await fetchData(
+      process.env.GOOGLE_SHEETS_ID,
+      "accelerators!A1:Z100"
+    );
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error fetching accelerators data:", error);
     res.status(500).json({ error: "failed to fetch accelerators data" });
@@ -160,13 +169,12 @@ router.get("/events", async (req: Request, res: Response) => {
   console.log("Received request on /api/sheets/events");
 
   try {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "events!A1:Z100", // Make sure you have a sheet named "events"
-    });
-
-    console.log("Events data retrieved:", response.data.values);
-    res.json({ data: response.data.values });
+    const response = await fetchData(
+      process.env.GOOGLE_SHEETS_ID,
+      "events!A1:Z100"
+    );
+    console.log("Events data retrieved:", response.values);
+    res.json({ data: response.values });
   } catch (error) {
     console.error("Error fetching events data:", error);
     res.status(500).json({ error: "failed to fetch events data" });
