@@ -35,12 +35,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Dock activeItem={activeItem} onNavigate={handleNavigate} />
-        <Navbar activeItem={activeItem} onNavigate={handleNavigate} />
-        <div className="hidden sm:block">
-          <EngravedTag />
+        <div>
+          <Navbar activeItem={activeItem} onNavigate={handleNavigate} />
+          <Dock activeItem={activeItem} onNavigate={handleNavigate} />
+          <div className="hidden sm:block">
+            <EngravedTag />
+          </div>
+          <SpeedInsights />
+          <main>{children}</main>
         </div>
-        <main>{children}</main>
       </body>
     </html>
   );
