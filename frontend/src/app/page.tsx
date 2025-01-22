@@ -9,38 +9,35 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import IntroSection from "@/components/ui/introSection";
 
 const Home = () => {
-  useEffect(() => {
-    console.log("Rendering Home Component");
-  }, []);
-
   const [eventsPreview, setEventsPreview] = useState<string[][]>([]);
   const [jobsPreview, setJobsPreview] = useState<string[][]>([]);
   const [networkPreview, setNetworkPreview] = useState<string[][]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const [eventsRes, jobsRes, networkRes] = await Promise.all([
-          fetch(`${config.backendUrl}/api/sheets/events?limit=6`),
-          fetch(`${config.backendUrl}/api/sheets/jobs?limit=6`),
-          fetch(`${config.backendUrl}/api/sheets/startups?limit=6`),
-        ]);
-
-        const eventsData = (await eventsRes.json()).data.slice(1) || [];
-        const jobsData = (await jobsRes.json()).data.slice(1) || [];
-        const networkData = (await networkRes.json()).data.slice(1) || [];
-
-        console.log("Events Data:", eventsData);
-        console.log("Jobs Data:", jobsData);
-        console.log("Network Data:", networkData);
-
-        setEventsPreview(eventsData);
-        setJobsPreview(jobsData);
-        setNetworkPreview(networkData);
+        const endpoints = [
+          `${config.backendUrl}/api/sheets/events?limit=6`,
+          `${config.backendUrl}/api/sheets/jobs?limit=6`,
+          `${config.backendUrl}/api/sheets/startups?limit=6`,
+        ];
+        const responses = await Promise.all(
+          endpoints.map(async (endpoint) => {
+            const response = await fetch(endpoint);
+            return (await response.json()).data.slice(1) || [];
+          })
+        );
+        setEventsPreview(responses[0]);
+        setJobsPreview(responses[1]);
+        setNetworkPreview(responses[2]);
       } catch (error) {
         console.error("Error fetching preview data:", error);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
     fetchData();
   }, []);
 
@@ -55,6 +52,8 @@ const Home = () => {
   useEffect(() => {
     console.log("Network Preview Updated:", networkPreview);
   }, [networkPreview]);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-950 text-white overflow-hidden">

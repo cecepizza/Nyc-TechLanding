@@ -11,9 +11,11 @@ export default function Ecosystem() {
   const [startups, setStartups] = useState<string[][]>([]);
   const [vcs, setVcs] = useState<string[][]>([]);
   const [accelerators, setAccelerators] = useState<string[][]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
+      setLoading(true);
       try {
         const SHEET_IDS = {
           startups: "spreadsheet_id_1",
@@ -21,27 +23,31 @@ export default function Ecosystem() {
           accelerators: "spreadsheet_id_3",
         };
 
-        const [startupsRes, vcsRes, acceleratorsRes] = await Promise.all([
-          fetch(
-            config.backendUrl + `/api/sheets/startups?id=${SHEET_IDS.startups}`
-          ),
-          fetch(config.backendUrl + `/api/sheets/vcs?id=${SHEET_IDS.vcs}`),
-          fetch(
-            config.backendUrl +
-              `/api/sheets/accelerators?id=${SHEET_IDS.accelerators}`
-          ),
-        ]);
+        const endpoints = [
+          `/api/sheets/startups?id=${SHEET_IDS.startups}`,
+          `/api/sheets/vcs?id=${SHEET_IDS.vcs}`,
+          `/api/sheets/accelerators?id=${SHEET_IDS.accelerators}`,
+        ];
 
-        setStartups((await startupsRes.json()).data || []);
-        setVcs((await vcsRes.json()).data || []);
-        setAccelerators((await acceleratorsRes.json()).data || []);
+        const responses = await Promise.all(
+          endpoints.map((endpoint) =>
+            fetch(config.backendUrl + endpoint).then((res) => res.json())
+          )
+        );
+
+        setStartups(responses[0].data || []);
+        setVcs(responses[1].data || []);
+        setAccelerators(responses[2].data || []);
       } catch (error) {
         console.error("Error fetching ecosystem data:", error);
+      } finally {
+        setLoading(false);
       }
-    }
-
+    };
     fetchData();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white overflow-hidden">
