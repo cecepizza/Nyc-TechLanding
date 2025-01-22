@@ -1,3 +1,4 @@
+// JobFilter.tsx
 "use client";
 
 import React from "react";
@@ -6,22 +7,28 @@ interface FilterBarProps {
   searchQuery: string;
   selectedCategory: string;
   selectedLocation: string;
-  selectedDate: string;
+  selectedSeniority: string;
   onSearchChange: (value: string) => void;
   onCategoryChange: (value: string) => void;
   onLocationChange: (value: string) => void;
-  onDateChange: (value: string) => void;
+  onSeniorityChange: (value: string) => void;
+  categories: string[];
+  locations: string[];
+  seniorityLevels: string[];
 }
 
 const FilterBar: React.FC<FilterBarProps> = ({
   searchQuery,
   selectedCategory,
   selectedLocation,
-  selectedDate,
+  selectedSeniority,
   onSearchChange,
   onCategoryChange,
   onLocationChange,
-  onDateChange,
+  onSeniorityChange,
+  categories,
+  locations,
+  seniorityLevels,
 }) => {
   const containerStyle: React.CSSProperties = {
     background: "linear-gradient(135deg, #141c2b, #1a2333)",
@@ -48,9 +55,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
     fontSize: "0.95rem",
     transition: "all 0.3s ease-in-out",
     width: "100%",
-    maxWidth: "400px", // Longer width for the search bar
+    maxWidth: "400px",
     textAlign: "left",
-    flexGrow: 2, // Makes it proportionally larger
+    flexGrow: 2,
   };
 
   const selectStyle: React.CSSProperties = {
@@ -62,9 +69,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
     fontSize: "0.95rem",
     transition: "all 0.3s ease-in-out",
     width: "100%",
-    maxWidth: "200px", // Shorter width for dropdowns
+    maxWidth: "200px",
     textAlign: "left",
-    flexGrow: 1, // Proportional width
+    flexGrow: 1,
   };
 
   const focusHoverStyle: React.CSSProperties = {
@@ -75,7 +82,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
   return (
     <div style={containerStyle}>
-      {/* Search Input */}
       <input
         type="text"
         placeholder="Search for a job..."
@@ -95,7 +101,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
         onChange={(e) => onSearchChange(e.target.value)}
       />
 
-      {/* Category Dropdown */}
       <select
         value={selectedCategory}
         style={selectStyle}
@@ -107,14 +112,13 @@ const FilterBar: React.FC<FilterBarProps> = ({
         onChange={(e) => onCategoryChange(e.target.value)}
       >
         <option value="">All Categories</option>
-        <option value="Software Development">Software Development</option>
-        <option value="Data Science">Data Science</option>
-        <option value="DevOps">DevOps</option>
-        <option value="Quality Assurance">Quality Assurance</option>
-        <option value="UI/UX Design">UI/UX Design</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
       </select>
 
-      {/* Location Dropdown */}
       <select
         value={selectedLocation}
         style={selectStyle}
@@ -126,30 +130,29 @@ const FilterBar: React.FC<FilterBarProps> = ({
         onChange={(e) => onLocationChange(e.target.value)}
       >
         <option value="">All Locations</option>
-        <option value="Manhattan">Manhattan</option>
-        <option value="Brooklyn">Brooklyn</option>
-        <option value="Queens">Queens</option>
-        <option value="Bronx">Bronx</option>
-        <option value="Staten Island">Staten Island</option>
+        {locations.map((location) => (
+          <option key={location} value={location}>
+            {location}
+          </option>
+        ))}
       </select>
 
-      {/* Date/Level Dropdown */}
       <select
-        value={selectedDate}
+        value={selectedSeniority}
         style={selectStyle}
         onFocus={(e) =>
           (e.currentTarget.style.boxShadow =
             "0 0 10px #60a5fa, 0 0 20px #3b82f6")
         }
         onBlur={(e) => (e.currentTarget.style.boxShadow = "none")}
-        onChange={(e) => onDateChange(e.target.value)}
+        onChange={(e) => onSeniorityChange(e.target.value)}
       >
         <option value="">All Seniority Levels</option>
-        <option value="Intern">Intern</option>
-        <option value="Junior">Junior</option>
-        <option value="Mid">Mid</option>
-        <option value="Senior">Senior</option>
-        <option value="Lead">Lead</option>
+        {seniorityLevels.map((level) => (
+          <option key={level} value={level}>
+            {level}
+          </option>
+        ))}
       </select>
     </div>
   );

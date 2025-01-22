@@ -1,3 +1,4 @@
+// Jobs.tsx
 "use client";
 
 import { config } from "@/config";
@@ -13,8 +14,16 @@ export default function Jobs() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedSeniority, setSelectedSeniority] = useState<string>("");
   const [loading, setLoading] = useState(true);
+
+  // Extract unique values from jobs data for filters
+  const getUniqueValues = (columnIndex: number) => {
+    if (!jobs.length) return [];
+    return Array.from(new Set(jobs.slice(1).map((job) => job[columnIndex])))
+      .filter(Boolean)
+      .sort();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,19 +44,27 @@ export default function Jobs() {
     fetchData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  const categories = getUniqueValues(9);
+  const locations = getUniqueValues(4);
+  const seniorityLevels = getUniqueValues(10);
 
-  const filteredJobs = jobs
-    .slice(1)
-    .filter(
-      (job) =>
-        job.some((field) =>
-          field.toLowerCase().includes(searchQuery.toLowerCase())
-        ) &&
-        (selectedCategory ? job[1] === selectedCategory : true) &&
-        (selectedLocation ? job[4] === selectedLocation : true) &&
-        (selectedDate ? job[2] === selectedDate : true)
+  const filteredJobs = jobs.slice(1).filter((job) => {
+    const matchesSearch =
+      !searchQuery ||
+      job.some((field) =>
+        field?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    const matchesCategory = !selectedCategory || job[9] === selectedCategory;
+    const matchesLocation = !selectedLocation || job[4] === selectedLocation;
+    const matchesSeniority =
+      !selectedSeniority || job[10] === selectedSeniority;
+
+    return (
+      matchesSearch && matchesCategory && matchesLocation && matchesSeniority
     );
+  });
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-950">
@@ -80,11 +97,14 @@ export default function Jobs() {
           searchQuery={searchQuery}
           selectedCategory={selectedCategory}
           selectedLocation={selectedLocation}
-          selectedDate={selectedDate}
+          selectedSeniority={selectedSeniority}
           onSearchChange={setSearchQuery}
           onCategoryChange={setSelectedCategory}
           onLocationChange={setSelectedLocation}
-          onDateChange={setSelectedDate}
+          onSeniorityChange={setSelectedSeniority}
+          categories={categories}
+          locations={locations}
+          seniorityLevels={seniorityLevels}
         />
 
         {/* Jobs Grid */}
