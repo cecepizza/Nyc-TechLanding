@@ -96,7 +96,7 @@ export default function Jobs() {
               target="_blank"
               rel="noopener noreferrer"
               className="job-card"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
             >
               <div className="job-card-icon mb-2">

@@ -35,18 +35,14 @@ const NavBar = memo(
         {/* Navigation Links */}
         <ul className={`${styles.navList} ${menuOpen ? styles.active : ""}`}>
           {navLinks.map((link) => (
-            <li
-              key={link.key}
-              className={`${styles.navItem} ${
-                activeItem === link.key ? styles.active : ""
-              }`}
-            >
+            <li key={link.key} className={styles.navItem}>
               <Link
                 href={link.path}
                 onClick={() => {
                   onNavigate(link.key);
                   setMenuOpen(false); /* Close menu after clicking a link */
                 }}
+                className={activeItem === link.key ? styles.active : ""}
               >
                 {link.label}
               </Link>

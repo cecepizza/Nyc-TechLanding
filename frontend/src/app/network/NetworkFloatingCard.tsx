@@ -7,7 +7,6 @@ interface FloatingCardProps {
   title: string;
   description: string;
   link?: string;
-  position?: [number, number, number];
 }
 
 const FloatingCard: React.FC<FloatingCardProps> = ({
@@ -17,21 +16,25 @@ const FloatingCard: React.FC<FloatingCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="p-6 rounded-xl bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 shadow-xl transform hover:scale-105 transition-all"
+      className="p-4 sm:p-5 rounded-lg bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-md border border-gray-700 transition-all duration-300"
       whileHover={{
         scale: 1.05,
-        boxShadow: "0px 8px 30px rgba(0, 255, 255, 0.3)",
+        background:
+          "linear-gradient(135deg, rgba(14,165,233,0.4), rgba(8,145,178,0.9), rgba(3,105,161,0.1))",
+        boxShadow: "0px 10px 20px rgba(14, 165, 233, 0.3)",
+        borderColor: "#ffcc00",
       }}
-      transition={{ duration: 0.3 }}
     >
-      <h3 className="text-2xl font-semibold text-teal-300 mb-3">{title}</h3>
-      <p className="text-gray-300 text-sm mb-6">{description}</p>
+      <h3 className="text-base sm:text-lg font-semibold text-cyan-400 mb-2">
+        {title}
+      </h3>
+      <p className="text-sm sm:text-base text-gray-300 mb-4">{description}</p>
       {link && (
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-cyan-500 hover:text-teal-300 font-medium transition"
+          className="text-cyan-400 hover:text-cyan-300 font-medium transition text-sm sm:text-base"
         >
           Learn More →
         </a>
