@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/ui/Navbar";
 import { Dock } from "@/components/ui/Dock";
 import EngravedTag from "@/components/ui/EngravedTag";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
