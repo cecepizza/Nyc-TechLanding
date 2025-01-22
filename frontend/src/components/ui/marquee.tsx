@@ -65,7 +65,9 @@ export default function Marquee({
     <div className="relative">
       <button
         onClick={scrollLeft}
-        className="absolute left-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all"
+        className="absolute left-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all
+                 md:p-2 md:rounded-lg md:shadow-lg
+                 sm:p-1 sm:rounded-md sm:shadow-md"
       >
         &lt;
       </button>
@@ -80,6 +82,8 @@ export default function Marquee({
             "flex-row": !vertical,
             "flex-col": vertical,
           },
+          "md:p-2 md:rounded-lg md:border-2",
+          "sm:p-1 sm:rounded-md sm:border",
           className
         )}
       >
@@ -105,7 +109,9 @@ export default function Marquee({
       </div>
       <button
         onClick={scrollRight}
-        className="absolute right-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all"
+        className="absolute right-0 top-0 h-full transform z-10 bg-gradient-to-b from-[#4a90e2] to-[#007aff] text-white p-2 rounded-lg shadow-lg hover:bg-gradient-to-b hover:from-[#14b8a6] hover:to-[#6366f1] transition-all
+                 md:p-2 md:rounded-lg md:shadow-lg
+                 sm:p-1 sm:rounded-md sm:shadow-md"
       >
         &gt;
       </button>

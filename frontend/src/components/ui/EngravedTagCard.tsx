@@ -22,9 +22,6 @@ export const EngravedTagContainer = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const [fontSize, setFontSize] = useState("1rem");
-  const [margin, setMargin] = useState("10px");
-  const [isMobile, setIsMobile] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -44,29 +41,14 @@ export const EngravedTagContainer = ({
     }
   };
 
-  useEffect(() => {
-    const updateSize = () => {
-      const isMobileView = window.innerWidth < 768;
-      setFontSize(isMobileView ? ".7rem" : "1rem");
-      setMargin(isMobileView ? "105px" : "20px");
-      setIsMobile(isMobileView);
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
-        className={cn("flex items-center justify-center", className)}
-        style={{
-          perspective: "1200px",
-          fontSize,
-          margin: isMobile ? "5px 0px 0px 0px" : margin,
-          transform: isMobile ? "scale(0.65)" : "scale(1)",
-        }}
+        className={cn(
+          "flex items-center justify-center hide-on-small",
+          className
+        )}
+        style={{ perspective: "1200px" }}
       >
         <div
           ref={containerRef}
@@ -98,24 +80,15 @@ export const EngravedTagItem = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const updateIsMobile = () => setIsMobile(window.innerWidth < 768);
-
-    updateIsMobile();
-    window.addEventListener("resize", updateIsMobile);
-    return () => window.removeEventListener("resize", updateIsMobile);
-  }, []);
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.style.transform =
-        isMouseEntered && !isMobile ? "scale(1.05)" : "scale(1)";
-      ref.current.style.animation =
-        isMouseEntered && !isMobile ? "shiny 1s forwards" : "none";
+      ref.current.style.transform = isMouseEntered ? "scale(1.05)" : "scale(1)";
+      ref.current.style.animation = isMouseEntered
+        ? "shiny 1s forwards"
+        : "none";
     }
-  }, [isMouseEntered, isMobile]);
+  }, [isMouseEntered]);
 
   return (
     <Tag
@@ -153,12 +126,22 @@ const styles = `
   background-size: 200% 100%;
   border-radius: 4px;
 }
+
+.hide-on-small {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .hide-on-small {
+    display: none;
+  }
+}
 `;
 
-// Inject styles into the document
-if (typeof document !== "undefined") {
-  const styleSheet = document.createElement("style");
-  styleSheet.type = "text/css";
-  styleSheet.innerText = styles;
-  document.head.appendChild(styleSheet);
-}
+// // Inject styles into the document
+// if (typeof document !== "undefined") {
+//   const styleSheet = document.createElement("style");
+//   styleSheet.type = "text/css";
+//   styleSheet.innerText = styles;
+//   document.head.appendChild(styleSheet);
+// }

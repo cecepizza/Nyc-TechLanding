@@ -69,8 +69,9 @@
   }
 }
 
-.navItem a:hover {
-  color: #ffcc00; /* Change to your desired hover color */
+.navItem a:hover,
+.navItem a.active {
+  color: #ffcc00; /* Change to your desired hover and active color */
 }
 
 .brand {

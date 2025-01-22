@@ -64,8 +64,8 @@ export default function Events() {
 
   return (
     <div className="events-page">
-      <Boxes className="absolute inset-0 z-0 bg-opacity-70" />
-      <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-4 md:p-8">
+      <Boxes className="fixed inset-0 z-0 bg-opacity-100" />
+      <div className="relative z-10 max-w-6xl mx-auto space-y-8 p-2 md:p-8">
         {/* Page Header */}
         <div className="events-header">
           <motion.h1
@@ -110,6 +110,7 @@ export default function Events() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
+              style={{ marginTop: "0rem" }}
             >
               <CalendarComponent onEventClick={handleCalendarEventClick} />
             </motion.div>

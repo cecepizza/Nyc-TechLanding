@@ -16,44 +16,40 @@ const Tabs: React.FC<TabsProps> = ({ startups, vcs, accelerators }) => {
   const tabs = [
     { label: "Startups", data: startups },
     { label: "Venture Capitalists", data: vcs },
-    { label: "Accelerators & Incubators", data: accelerators },
+    { label: "Accelerators", data: accelerators },
   ];
 
   return (
     <div className="relative">
-      {/* Tabs Navigation (Manila Folder Style) */}
-      <div className="flex justify-center relative mb-8">
+      {/* Tabs Navigation */}
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
         {tabs.map((tab, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`px-6 py-3 text-lg font-medium relative z-10 ${
+            className={`px-4 py-2 text-sm sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
               activeTab === index
-                ? "bg-beige-100 text-gray-800 shadow-md rounded-t-lg"
-                : "bg-beige-200 text-gray-600 hover:bg-beige-300"
-            } transition-all duration-300 mx-2`}
-            style={{
-              borderBottom: activeTab === index ? "none" : "2px solid #e0e0e0",
-            }}
+                ? "bg-gradient-to-r from-cyan-500 to-cyan-700 text-black shadow-md"
+                : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
             {tab.label}
-          </button>
+          </motion.button>
         ))}
       </div>
-
-      {/* Tabs Background to Simulate Manila Folder */}
-      <div className="absolute inset-x-0 top-9 h-2 bg-beige-200 rounded-t-md z-0"></div>
 
       {/* Tab Content */}
       <motion.div
         key={activeTab}
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
+        exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md p-6 rounded-b-lg shadow-md"
+        className="p-4 sm:p-6 rounded-lg bg-gradient-to-br from-gray-900 via-black to-gray-950 shadow-xl"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {tabs[activeTab].data.slice(1).map((item, index) => (
             <FloatingCard
               key={index}
